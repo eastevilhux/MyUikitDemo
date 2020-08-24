@@ -1,0 +1,3 @@
+include ':lib-uikit'
+include ':app'
+rootProject.name = "MyUikitDemo"
