@@ -28,6 +28,9 @@ class ItemText private constructor(builder:Builder){
     var selectedImageType : Int = IMAGE_TYPE_RESOURCE
         private set
 
+    var tag : Any? = null;
+    var id : Int = 0;
+
     init {
         text = builder.text;
         textResId = builder.textResId;
@@ -36,6 +39,8 @@ class ItemText private constructor(builder:Builder){
         selectedResUrl = builder.selectedResUrl;
         selectedImageType = builder.selectedImageType;
         textType = builder.textType;
+        id = builder.id;
+        tag = builder.tag;
     }
 
 
@@ -47,6 +52,8 @@ class ItemText private constructor(builder:Builder){
         var selectedResUrl : String? = null
         var selectedImageType : Int = IMAGE_TYPE_RESOURCE
         var textType : Int = TEXT_TYPE_RESOUCE;
+        var id : Int = 0;
+        var tag : Any? = null;
 
         fun text(text:String): Builder {
             this.text = text;
@@ -82,6 +89,16 @@ class ItemText private constructor(builder:Builder){
 
         fun builder(): ItemText {
             return ItemText(this);
+        }
+
+        fun setId(id : Int): Builder {
+            this.id = id;
+            return this;
+        }
+
+        fun setTag(tag :Any): Builder {
+            this.tag = tag;
+            return this;
         }
     }
 }
