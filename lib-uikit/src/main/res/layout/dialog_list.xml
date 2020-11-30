@@ -54,7 +54,9 @@
             android:id="@+id/dialog_title_layout"
             android:layout_width="match_parent"
             android:layout_height="@dimen/dp_30"
-            android:visibility="@{haveTitle ? View.VISIBLE : View.GONE}">
+            android:visibility="@{haveTitle ? View.VISIBLE : View.GONE}"
+            android:paddingLeft="@dimen/dp_10"
+            android:paddingRight="@dimen/dp_10">
 
             <TextView
                 android:id="@+id/tv_back"
@@ -75,8 +77,7 @@
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                android:text="@{titleText}"
-                android:visibility="@{haveBack ? View.VISIBLE : View.GONE}"/>
+                android:text="@{titleText}" />
 
             <TextView
                 android:id="@+id/tv_menu"

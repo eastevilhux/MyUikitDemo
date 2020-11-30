@@ -61,8 +61,6 @@ class ListDialog private constructor(builder:Builder) : Dialog(builder.context, 
     private var backgroundResource : Int = R.drawable.bg_button;
 
     private var lastSelect : Int = -1;
-
-
     private var select : ((itemText : ItemText)->Unit)? = null;
 
     init {
@@ -90,6 +88,7 @@ class ListDialog private constructor(builder:Builder) : Dialog(builder.context, 
         backImageType = builder.backImageType;
         menuImageType = builder.menuImageType;
         backgroundResource = builder.backgroundResource;
+        select = builder.select;
         adapter = ItemTextAdapter(itemList,builder.context);
         adapter.setPresenter(this)
     }
@@ -276,6 +275,7 @@ class ListDialog private constructor(builder:Builder) : Dialog(builder.context, 
         internal var backUrl : String? = null;
         internal var menuUrl : String? = null;
         internal var backgroundResource : Int = R.drawable.bg_button;
+        internal var select : ((itemText : ItemText)->Unit)? = null;
 
         constructor(context: Context) : this() {
             this.context = context;
@@ -395,6 +395,10 @@ class ListDialog private constructor(builder:Builder) : Dialog(builder.context, 
         fun addList(itemList : MutableList<ItemText>): Builder {
             this.itemList = itemList;
             return this;
+        }
+
+        fun addSelect(select : ((itemText : ItemText)->Unit)){
+            this.select = select;
         }
 
         fun backgroundResource(backgroundResource : Int): Builder {
