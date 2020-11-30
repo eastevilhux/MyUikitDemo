@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <import type="android.view.View"/>
+        <variable
+            name="dialog"
+            type="com.god.uikit.widget.dialog.ListDialog" />
+        <variable
+            name="titleText"
+            type="androidx.databinding.ObservableField&lt;String&gt;" />
+
+        <variable
+            name="backText"
+            type="androidx.databinding.ObservableField&lt;String&gt;" />
+
+        <variable
+            name="menuText"
+            type="androidx.databinding.ObservableField&lt;String&gt;" />
+
+        <variable
+            name="submitText"
+            type="androidx.databinding.ObservableField&lt;String&gt;" />
+
+        <variable
+            name="haveTitle"
+            type="androidx.databinding.ObservableField&lt;Boolean&gt;" />
+
+        <variable
+            name="haveBack"
+            type="androidx.databinding.ObservableField&lt;Boolean&gt;" />
+
+        <variable
+            name="haveMenu"
+            type="androidx.databinding.ObservableField&lt;Boolean&gt;" />
+
+        <variable
+            name="haveSubmit"
+            type="androidx.databinding.ObservableField&lt;Boolean&gt;" />
+
+        <variable
+            name="adapter"
+            type="com.god.uikit.adapter.ItemTextAdapter" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:background="@drawable/bg_white_border_10">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/dialog_title_layout"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_30"
+            android:visibility="@{haveTitle ? View.VISIBLE : View.GONE}">
+
+            <TextView
+                android:id="@+id/tv_back"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="@style/AppTextTheme"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                android:text="@{backText}"
+                android:visibility="@{haveBack ? View.VISIBLE : View.GONE}"/>
+
+            <TextView
+                android:id="@+id/tv_title"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                style="@style/AppTextTheme"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:text="@{titleText}"
+                android:visibility="@{haveBack ? View.VISIBLE : View.GONE}"/>
+
+            <TextView
+                android:id="@+id/tv_menu"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                style="@style/AppTextTheme"
+                android:text="@{menuText}"
+                android:visibility="@{haveMenu ? View.VISIBLE : View.GONE}"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <ListView
+            android:id="@+id/menu_listview"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:adapter="@{adapter}"/>
+
+
+        <Button
+            android:id="@+id/menu_button"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_40"
+            android:layout_marginTop="@dimen/dp_10"
+            android:visibility="@{haveSubmit ? View.VISIBLE : View.GONE}"
+            android:text="@{submitText}"
+            style="@style/SubmitButtonTheme"
+            android:background="@drawable/bg_button"/>
+
+    </LinearLayout>
+
+</layout>

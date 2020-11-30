@@ -65,7 +65,6 @@ public abstract class BaseListAdapter<D extends ViewDataBinding,T> extends BaseA
         inflater = LayoutInflater.from(context);
     }
 
-
     @Override
     public Object getItem(int position) {
         return position;
@@ -91,6 +90,7 @@ public abstract class BaseListAdapter<D extends ViewDataBinding,T> extends BaseA
             dataBinding = DataBindingUtil.getBinding(view);
         }
         setBean(list.get(position));
+        setView(dataBinding,getList().get(position));
         setPresenter(dataBinding);
         setVariableId(dataBinding,position);
         dataBinding.setVariable(variableId,list.get(position));
@@ -127,6 +127,9 @@ public abstract class BaseListAdapter<D extends ViewDataBinding,T> extends BaseA
 
     }
 
+    public void setView(D dataBinding,T bean){
+
+    }
 
     public Context getContext() {
         return context;
