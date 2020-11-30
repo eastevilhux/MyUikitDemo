@@ -4,6 +4,7 @@ import android.app.Dialog
 import android.content.Context
 import android.graphics.Bitmap
 import android.os.Bundle
+import android.text.style.LineBackgroundSpan
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ObservableField
 import com.bumptech.glide.Glide
@@ -15,6 +16,7 @@ import com.god.uikit.databinding.DialogListBinding
 import com.god.uikit.entity.Item
 import com.god.uikit.entity.ItemText
 import com.god.uikit.presenter.ItemTextPresenter
+import com.god.uikit.utils.ViewUtil
 import com.god.uikit.utils.dip2Px
 import com.god.uikit.utils.isNotNullOrEmpty
 import kotlinx.android.synthetic.main.layout_selectitem.*
@@ -56,6 +58,7 @@ class ListDialog private constructor(builder:Builder) : Dialog(builder.context, 
     private var menuUrl : String? = null;
     private var backImageType : Int = Constants.IMAGE_TYPE_RESOURCE;
     private var menuImageType : Int = Constants.IMAGE_TYPE_RESOURCE;
+    private var backgroundResource : Int = R.drawable.bg_button;
 
     private var lastSelect : Int = -1;
 
@@ -86,6 +89,7 @@ class ListDialog private constructor(builder:Builder) : Dialog(builder.context, 
         menuUrl = builder.menuUrl;
         backImageType = builder.backImageType;
         menuImageType = builder.menuImageType;
+        backgroundResource = builder.backgroundResource;
         adapter = ItemTextAdapter(itemList,builder.context);
         adapter.setPresenter(this)
     }
@@ -103,9 +107,49 @@ class ListDialog private constructor(builder:Builder) : Dialog(builder.context, 
         dataBinding.menuText = menuText;
         dataBinding.submitText = submitText;
         dataBinding.dialog = this;
+        dataBinding.menuButton.setBackgroundResource(backgroundResource);
         initBack();
         initMenu();
+        countSize();
         setContentView(dataBinding.root);
+    }
+
+    private fun countSize(){
+        val titleHeight = 30.dip2Px();
+        val bottomHeight = 50.dip2Px();
+        val size = itemList?.size?:0;
+        var itemHeight : Int = 0;
+        if(size > 0){
+            itemHeight = (size * 40.dip2Px()) + ((size-1).dip2Px());
+        }
+        val height = titleHeight + bottomHeight + itemHeight;
+
+        val dialogWindow = window
+        val lp = dialogWindow!!.attributes
+
+        lp.width = ViewUtil.getScreenSize(context)[0] - 100.dip2Px();
+        lp.height = height
+        //lp.alpha = 0.7f; // 透明度
+        //lp.alpha = 0.7f; // 透明度
+        dialogWindow!!.attributes = lp
+    }
+
+    override fun onItemText(itemText: ItemText) {
+        if(selectType == SELECT_TYPE_DISMISS){
+            dismiss();
+        }else{
+            itemText.selected = true;
+            if(lastSelect != -1){
+                itemList?.get(lastSelect)?.selected = false
+                lastSelect = itemList?.indexOf(itemText)?:-1;
+            }else{
+                lastSelect = itemList?.indexOf(itemText)?:-1;
+            }
+            adapter.list = itemList;
+            adapter.notifyDataSetChanged();
+        }
+        select?.invoke(itemText);
+        onSlectedListener?.onSelect(itemText);
     }
 
 
@@ -150,6 +194,61 @@ class ListDialog private constructor(builder:Builder) : Dialog(builder.context, 
         }
     }
 
+    fun notifyList(itemList: MutableList<ItemText>){
+        this.itemList = itemList;
+        countSize();
+        adapter.list = itemList;
+        adapter.notifyDataSetChanged();
+    }
+
+    fun setSelectType(selectType : Int){
+        this.selectType = selectType;
+    }
+
+    fun setTitle(title : String){
+        this.title.set(title);
+        if(title.isNotNullOrEmpty()){
+            this.haveMenu.set(true);
+        }
+    }
+
+    fun setBack(backText: String){
+        this.backText.set(backText);
+        this.backType = TYPE_TEXT;
+        initBack();
+    }
+
+    fun setBack(backSrc: Int){
+        this.backSrc = backSrc;
+        this.backImageType = Constants.IMAGE_TYPE_RESOURCE;
+        initBack();
+    }
+
+    fun setMenu(menuText : String){
+        this.menuText.set(menuText);
+        this.menuType = TYPE_TEXT;
+        initMenu();
+    }
+
+    fun setMenu(menuSrc: Int){
+        this.menuSrc = menuSrc;
+        this.menuImageType = Constants.IMAGE_TYPE_RESOURCE;
+        initMenu();
+    }
+
+    fun setSubmitText(submitText: String){
+        this.submitText.set(submitText);
+        if(submitText.isNotNullOrEmpty()){
+            this.haveSubmit.set(true);
+        }
+    }
+
+    fun setSubmitBackground(backgroundResource : Int){
+        this.backgroundResource = backgroundResource;
+        dataBinding.menuButton.setBackgroundResource(backgroundResource);
+    }
+
+
     class Builder(){
         lateinit var context : Context;
 
@@ -176,6 +275,7 @@ class ListDialog private constructor(builder:Builder) : Dialog(builder.context, 
         internal var menuSrc : Int = R.drawable.ic_title_menu_white;
         internal var backUrl : String? = null;
         internal var menuUrl : String? = null;
+        internal var backgroundResource : Int = R.drawable.bg_button;
 
         constructor(context: Context) : this() {
             this.context = context;
@@ -296,25 +396,17 @@ class ListDialog private constructor(builder:Builder) : Dialog(builder.context, 
             this.itemList = itemList;
             return this;
         }
+
+        fun backgroundResource(backgroundResource : Int): Builder {
+            this.backgroundResource = backgroundResource;
+            return this;
+        }
+
+        fun builder(): ListDialog {
+            return ListDialog(this);
+        }
     }
 
-    override fun onItemText(itemText: ItemText) {
-        if(selectType == SELECT_TYPE_DISMISS){
-            dismiss();
-        }else{
-            itemText.selected = true;
-            if(lastSelect != -1){
-                itemList?.get(lastSelect)?.selected = false
-                lastSelect = itemList?.indexOf(itemText)?:-1;
-            }else{
-                lastSelect = itemList?.indexOf(itemText)?:-1;
-            }
-            adapter.list = itemList;
-            adapter.notifyDataSetChanged();
-        }
-        select?.invoke(itemText);
-        onSlectedListener?.onSelect(itemText);
-    }
 
     interface OnSelectedListener{
         fun onSelect(itemText: ItemText);
