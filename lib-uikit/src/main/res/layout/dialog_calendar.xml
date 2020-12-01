@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <import type="android.view.View"/>
+        <variable
+            name="title"
+            type="androidx.databinding.ObservableField&lt;String&gt;" />
+        <variable
+            name="time"
+            type="androidx.databinding.ObservableField&lt;String&gt;" />
+
+        <variable
+            name="date"
+            type="androidx.databinding.ObservableField&lt;java.util.Date&gt;" />
+
+        <variable
+            name="week"
+            type="androidx.databinding.ObservableField&lt;String&gt;" />
+
+        <variable
+            name="adapter"
+            type="com.god.uikit.adapter.DayAdapter" />
+        <variable
+            name="dialog"
+            type="com.god.uikit.widget.dialog.CalendarDialog" />
+
+        <variable
+            name="haveTime"
+            type="androidx.databinding.ObservableField&lt;Boolean&gt;" />
+
+        <variable
+            name="containSecond"
+            type="androidx.databinding.ObservableField&lt;Boolean&gt;" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/bg_white_border_10">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/caltitle_layout"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_70"
+            android:orientation="vertical"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:background="@drawable/bg_calendar_title"
+            android:gravity="center_vertical">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:gravity="center_vertical|left"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                android:layout_marginLeft="@dimen/dp_10">
+
+                <TextView
+                    android:id="@+id/tv_date"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/sp_20"
+                    style="@style/AppTextTheme"
+                    android:text="@{date}"
+                    android:textColor="@color/colorWhite" />
+
+                <TextView
+                    android:id="@+id/tv_time"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    style="@style/AppTextTheme"
+                    android:text="@{time}"
+                    android:textColor="@color/colorWhite"
+                    android:visibility="@{haveTime ? View.VISIBLE : View.GONE}"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/colorWhite"
+                    android:textSize="@dimen/sp_20"
+                    android:text="@{week}"/>
+
+                <ImageView
+                    android:id="@+id/iv_lastmonth"
+                    android:layout_width="@dimen/dp_35"
+                    android:layout_height="@dimen/dp_20"
+                    android:src="@drawable/ic_calendar_up"
+                    android:layout_marginLeft="@dimen/dp_5"
+                    android:onClick="@{dialog.onViewClick}"/>
+
+
+                <ImageView
+                    android:id="@+id/iv_nextmonth"
+                    android:layout_width="@dimen/dp_35"
+                    android:layout_height="@dimen/dp_20"
+                    android:src="@drawable/ic_calendar_down"
+                    android:layout_marginLeft="@dimen/dp_5"
+                    android:onClick="@{dialog.onViewClick}"/>
+
+
+                <TextView
+                    android:id="@+id/tv_enter"
+                    android:layout_width="@dimen/dp_40"
+                    android:layout_height="@dimen/dp_20"
+                    style="@style/AppTextTheme"
+                    android:text="@string/lib_enter"
+                    android:layout_marginLeft="@dimen/dp_5"
+                    android:layout_marginRight="@dimen/dp_5"
+                    android:textColor="@color/colorWhite"
+                    android:background="@drawable/shape_calendar_enter"
+                    android:onClick="@{dialog.onViewClick}"/>
+
+            </LinearLayout>
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+        <GridView
+            android:id="@+id/date_gridview"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:numColumns="7"
+            app:layout_constraintTop_toBottomOf="@id/caltitle_layout"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/time_layout"
+            app:adapter="@{adapter}"
+            android:scrollbars="none"
+            android:overScrollMode="never"/>
+
+        <LinearLayout
+            android:id="@+id/time_layout"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/dp_90"
+            android:maxHeight="@dimen/dp_90"
+            android:orientation="horizontal"
+            android:gravity="center"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/date_gridview"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:visibility="@{haveTime ? View.VISIBLE : View.GONE}"
+            android:layout_marginTop="@dimen/dp_15">
+
+           <com.contrarywind.view.WheelView
+                android:id="@+id/hour_wheelview"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+               android:foregroundGravity="center_vertical"
+                android:layout_height="@dimen/dp_90"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="@style/AppTextTheme"
+                android:text="@string/lib_colon_english"/>
+
+            <com.contrarywind.view.WheelView
+                android:id="@+id/minute_wheelview"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:foregroundGravity="center_vertical"
+                android:layout_height="@dimen/dp_90"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="@style/AppTextTheme"
+                android:text="@string/lib_colon_english"
+                android:visibility="@{containSecond ? View.VISIBLE : View.GONE}"/>
+
+
+            <com.contrarywind.view.WheelView
+                android:id="@+id/second_wheelview"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:foregroundGravity="center_vertical"
+                android:layout_height="@dimen/dp_90"
+                android:visibility="@{containSecond ? View.VISIBLE : View.GONE}"/>
+
+        </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>
