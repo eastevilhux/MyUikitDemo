@@ -2,24 +2,19 @@ package com.god.uikit.widget.dialog
 
 import android.app.Dialog
 import android.content.Context
-import android.graphics.Bitmap
+import android.graphics.Color
 import android.os.Bundle
-import android.text.style.LineBackgroundSpan
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ObservableField
-import com.bumptech.glide.Glide
-import com.bumptech.glide.request.RequestOptions
 import com.god.uikit.R
 import com.god.uikit.adapter.ItemTextAdapter
 import com.god.uikit.commons.Constants
 import com.god.uikit.databinding.DialogListBinding
-import com.god.uikit.entity.Item
 import com.god.uikit.entity.ItemText
 import com.god.uikit.presenter.ItemTextPresenter
 import com.god.uikit.utils.ViewUtil
 import com.god.uikit.utils.dip2Px
 import com.god.uikit.utils.isNotNullOrEmpty
-import kotlinx.android.synthetic.main.layout_selectitem.*
 
 class ListDialog private constructor(builder:Builder) : Dialog(builder.context, R.style.DialogStyle),
     ItemTextPresenter{
@@ -60,6 +55,11 @@ class ListDialog private constructor(builder:Builder) : Dialog(builder.context, 
     private var menuImageType : Int = Constants.IMAGE_TYPE_RESOURCE;
     private var backgroundResource : Int = R.drawable.bg_button;
 
+    private var titleBackgroundColor : Int = Color.RED;
+    private var titleBackgroundResource : Int = R.color.colorWhite;
+    private var titleTextColor : Int = Color.WHITE;
+    private var titleTextColorResouce : Int = R.color.colorApp;
+
     private var lastSelect : Int = -1;
     private var select : ((itemText : ItemText)->Unit)? = null;
 
@@ -89,6 +89,11 @@ class ListDialog private constructor(builder:Builder) : Dialog(builder.context, 
         menuImageType = builder.menuImageType;
         backgroundResource = builder.backgroundResource;
         select = builder.select;
+        titleBackgroundColor = builder.titleBackgroundColor;
+        titleBackgroundResource = builder.titleBackgroundResource;
+        titleTextColor = builder.titleTextColor;
+        titleTextColorResouce = builder.titleTextColor;
+
         adapter = ItemTextAdapter(itemList,builder.context);
         adapter.setPresenter(this)
     }
@@ -107,10 +112,46 @@ class ListDialog private constructor(builder:Builder) : Dialog(builder.context, 
         dataBinding.submitText = submitText;
         dataBinding.dialog = this;
         dataBinding.menuButton.setBackgroundResource(backgroundResource);
+        initTitle();
         initBack();
         initMenu();
         countSize();
         setContentView(dataBinding.root);
+    }
+
+    private fun initTitle() {
+        if(haveTitle.get()!!){
+            setTitleBackground();
+            setTitleTextColor();
+        }
+    }
+
+    protected fun setTitleBackground(){
+        var color : Int? = null;
+        if(titleBackgroundColor != 0){
+            color = titleBackgroundColor;
+        }else{
+            color = context.getColor(titleBackgroundResource);
+        }
+        if(color == null){
+            return;
+        }else{
+            val r = 10.dip2Px().toFloat();
+            val dra = ViewUtil.createRectangleDrawable(color =color, radius = floatArrayOf(r,r,0F,0F));
+            dra?.let {
+                dataBinding.dialogTitleLayout.setBackgroundDrawable(dra);
+            }
+        }
+    }
+
+    protected fun setTitleTextColor(){
+        if(titleTextColor != 0){
+            dataBinding.tvTitle.setTextColor(titleTextColor);
+            return;
+        }
+        if(titleTextColorResouce != 0){
+            dataBinding.tvTitle.setTextColor(context.getColor(titleTextColorResouce));
+        }
     }
 
     private fun countSize(){
@@ -276,6 +317,10 @@ class ListDialog private constructor(builder:Builder) : Dialog(builder.context, 
         internal var menuUrl : String? = null;
         internal var backgroundResource : Int = R.drawable.bg_button;
         internal var select : ((itemText : ItemText)->Unit)? = null;
+        internal var titleBackgroundColor : Int = 0;
+        internal var titleBackgroundResource : Int = 0;
+        internal var titleTextColor : Int = 0;
+        internal var titleTextColorResouce : Int= 0;
 
         constructor(context: Context) : this() {
             this.context = context;
@@ -403,6 +448,26 @@ class ListDialog private constructor(builder:Builder) : Dialog(builder.context, 
 
         fun backgroundResource(backgroundResource : Int): Builder {
             this.backgroundResource = backgroundResource;
+            return this;
+        }
+
+        fun titleColorResource(colorRes: Int): Builder {
+            this.titleTextColorResouce = colorRes;
+            return this;
+        }
+
+        fun titleColor(color:Int): Builder {
+            this.titleTextColor = color;
+            return this;
+        }
+
+        fun titleBackgroundResource(colorRes: Int): Builder {
+            this.titleBackgroundResource = colorRes;
+            return this;
+        }
+
+        fun titleBackgroundColor(color: Int): Builder {
+            this.titleBackgroundColor = color;
             return this;
         }
 

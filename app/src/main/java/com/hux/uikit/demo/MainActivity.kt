@@ -1,12 +1,16 @@
 package com.hux.uikit.demo
 
+import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.TextView
+import com.god.uikit.entity.ItemText
 import com.god.uikit.widget.dialog.CalendarDialog
+import com.god.uikit.widget.dialog.ListDialog
 
 class MainActivity : AppCompatActivity() {
     private var calendarDialog : CalendarDialog? = null;
+    private var listDialog : ListDialog? = null;
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -20,6 +24,25 @@ class MainActivity : AppCompatActivity() {
             if(!calendarDialog!!.isShowing){
                 calendarDialog!!.show();
             }
+        }
+        var i = 0;
+        val list = mutableListOf<ItemText>();
+        while(i<5){
+            list.add(ItemText.Builder().text("${i}——text").builder());
+            i++;
+        }
+        findViewById<TextView>(R.id.tv_list_dialogtext).setOnClickListener {
+            listDialog?:let {
+                listDialog = ListDialog.Builder(this)
+                    .title("asdfasdfas")
+                    .addList(list)
+                    .selectType(ListDialog.SELECT_TYPE_SHOW)
+                    .submitText("what a fuck")
+                    .titleBackgroundResource(R.color.colorAccent)
+                    .titleColor(Color.BLACK)
+                    .builder()
+            }
+            listDialog!!.show();
         }
     }
 }
