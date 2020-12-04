@@ -20,4 +20,11 @@
         android:layout_height="wrap_content"
         android:text="list dialog test" />
 
+
+    <TextView
+        android:id="@+id/tv_msg_dialog"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="msg dialog test" />
+
 </LinearLayout>

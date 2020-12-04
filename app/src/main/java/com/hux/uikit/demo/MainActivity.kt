@@ -3,14 +3,17 @@ package com.hux.uikit.demo
 import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.Message
 import android.widget.TextView
 import com.god.uikit.entity.ItemText
 import com.god.uikit.widget.dialog.CalendarDialog
 import com.god.uikit.widget.dialog.ListDialog
+import com.god.uikit.widget.dialog.MessageDialog
 
 class MainActivity : AppCompatActivity() {
     private var calendarDialog : CalendarDialog? = null;
     private var listDialog : ListDialog? = null;
+    private var msgDialog : MessageDialog? = null;
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -43,6 +46,17 @@ class MainActivity : AppCompatActivity() {
                     .builder()
             }
             listDialog!!.show();
+        }
+
+        findViewById<TextView>(R.id.tv_msg_dialog).setOnClickListener {
+            msgDialog?:let {
+                msgDialog = MessageDialog.Builder(this)
+                    .title("title")
+                    .message("asdfasdfasdf")
+                    .btnBackgroundResource(R.drawable.shape_day_select,R.drawable.shape_take_photo)
+                    .build();
+            }
+            msgDialog!!.show();
         }
     }
 }
