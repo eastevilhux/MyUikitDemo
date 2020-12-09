@@ -26,6 +26,9 @@ import com.god.uikit.databinding.LayoutTitleBinding;
  */
 
 public class TitleLayout extends FrameLayout {
+    public static final int MENU_TEXT = 1;
+    public static final int MENU_IMAGE = 2;
+    public static final int NO_MENU = 0;
 
     private LayoutTitleBinding dataBinding;
 
@@ -167,6 +170,7 @@ public class TitleLayout extends FrameLayout {
     }
 
 
+
     public void setTitleText(String title){
         this.title.set(title);
     }
@@ -214,7 +218,13 @@ public class TitleLayout extends FrameLayout {
     }
 
     public void setMenu(String menu) {
+        this.menuType.set(MENU_TEXT);
         this.menu.set(menu);
+    }
+
+    public void setMenuImage(@DrawableRes int imageResource){
+        this.menuType.set(MENU_IMAGE);
+        dataBinding.menuImage.setImageResource(imageResource);
     }
 
 
