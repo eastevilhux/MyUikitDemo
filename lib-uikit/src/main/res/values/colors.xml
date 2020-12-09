@@ -10,6 +10,7 @@
     <color name="colorLine">#B4B4B4</color>
     <color name="colorMainBg">#F0F0F0</color>
     <color name="colorCalendarSel">#50CDDC</color>
+    <color name="colorLibMoney">#FFD700</color>
 
     <color name="ColorBtnSel">#FF4B46</color>
     <color name="ColorBtnNor">#FF5A5F</color>

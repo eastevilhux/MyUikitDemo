@@ -9,6 +9,7 @@ import com.god.uikit.entity.ItemText
 import com.god.uikit.widget.dialog.CalendarDialog
 import com.god.uikit.widget.dialog.ListDialog
 import com.god.uikit.widget.dialog.MessageDialog
+import com.god.uikit.widget.dialog.NumberpsdDialog
 
 class MainActivity : AppCompatActivity() {
     private var calendarDialog : CalendarDialog? = null;
@@ -57,6 +58,13 @@ class MainActivity : AppCompatActivity() {
                     .build();
             }
             msgDialog!!.show();
+        }
+
+        findViewById<TextView>(R.id.tv_number_dialog).setOnClickListener {
+            var numberpsdDialog = NumberpsdDialog.Builder(this)
+                .psdNumber(6)
+                .build();
+            numberpsdDialog.show();
         }
     }
 }
