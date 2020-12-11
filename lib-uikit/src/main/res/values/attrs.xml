@@ -110,7 +110,7 @@
         <attr name="itemTextColor" />
         <attr name="itemMenuText" format="string"/>
         <attr name="menuTextColor" />
-        <attr name="east_input_type" format="enum">
+        <attr name="inputType" format="enum">
             <enum name="default_type" value="0" />
             <enum name="mobile" value="1" />
             <enum name="number" value="2" />
@@ -245,5 +245,18 @@
         <attr name="isContinuousChar" format="boolean" />
         <attr name="isInvokingKeyboard" format="boolean" />
         <attr name="isPassword"/>
+    </declare-styleable>
+
+    <declare-styleable name="TabmenuLayout">
+        <attr name="lyn_lineState" format="boolean"/>
+        <attr name="lyn_lineColor" format="color"/>
+        <attr name="lyn_lineBackground" format="reference"></attr>
+        <attr name="lyn_menuText" format="string"/>
+        <attr name="lyn_menuTextColor" format="color"/>
+        <attr name="lyn_menuSelectColor" format="color"></attr>
+        <attr name="lyn_menuTextSize" format="dimension"/>
+        <attr name="lyn_line_height" format="dimension"/>
+        <attr name="lyn_line_width" format="dimension"/>
+        <attr name="lyn_lineMarginButtom" format="dimension"/>
     </declare-styleable>
 </resources>
