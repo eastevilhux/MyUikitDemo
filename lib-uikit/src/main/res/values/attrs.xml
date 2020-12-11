@@ -110,7 +110,7 @@
         <attr name="itemTextColor" />
         <attr name="itemMenuText" format="string"/>
         <attr name="menuTextColor" />
-        <attr name="inputType" format="enum">
+        <attr name="east_input_type" format="enum">
             <enum name="default_type" value="0" />
             <enum name="mobile" value="1" />
             <enum name="number" value="2" />

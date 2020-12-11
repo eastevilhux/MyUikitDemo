@@ -84,7 +84,7 @@ public class InputLayout extends FrameLayout implements CountDownTimerButton.OnC
                 ContextCompat.getColor(getContext(),R.color.colorWhite));
 
         menuBack = ta.getDrawable(R.styleable.InputLayout_menuBackground);
-        inputType = ta.getInt(R.styleable.InputLayout_inputType,0);
+        inputType = ta.getInt(R.styleable.InputLayout_east_input_type,0);
 
         ta.recycle();
         initView();
