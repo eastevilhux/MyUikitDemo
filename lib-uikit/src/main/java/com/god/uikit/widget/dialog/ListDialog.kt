@@ -167,8 +167,15 @@ class ListDialog private constructor(builder:Builder) : Dialog(builder.context, 
         val dialogWindow = window
         val lp = dialogWindow!!.attributes
 
-        lp.width = ViewUtil.getScreenSize(context)[0] - 100.dip2Px();
-        lp.height = height
+        val screenSize = ViewUtil.getScreenSize(context);
+        lp.width =  screenSize[0]- 100.dip2Px();
+
+        if(height >= screenSize[1] - 200.dip2Px()){
+            lp.height = screenSize[1] - 200.dip2Px();
+        }else{
+            lp.height = height
+        }
+
         //lp.alpha = 0.7f; // 透明度
         //lp.alpha = 0.7f; // 透明度
         dialogWindow!!.attributes = lp
