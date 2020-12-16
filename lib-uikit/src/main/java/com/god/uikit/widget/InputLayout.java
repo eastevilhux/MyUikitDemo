@@ -149,6 +149,10 @@ public class InputLayout extends FrameLayout implements CountDownTimerButton.OnC
         return dataBinding.inputEditview.getText().toString();
     }
 
+    public void setHintText(String hintText){
+        this.hintText.set(hintText);
+    }
+
     @Override
     public void onStart(View view) {
         if(onCountdownListener != null){
