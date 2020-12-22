@@ -50,44 +50,44 @@ public class SearchLayout extends FrameLayout {
         super(context, attrs);
         TypedArray ta = context.obtainStyledAttributes(attrs, R.styleable.SearchLayout);
 
-        haveMenu = new ObservableField<>(ta.getBoolean(R.styleable.SearchLayout_haveMenu,false));
-        haveMenuImage = new ObservableField<>(ta.getBoolean(R.styleable.SearchLayout_haveMenuImage,false));
-        haveMenuLine = new ObservableField<>(ta.getBoolean(R.styleable.SearchLayout_haveMenuLine,false));
-        haveArrow = new ObservableField<>(ta.getBoolean(R.styleable.SearchLayout_haveArrow,false));
-        haveCondition = new ObservableField<>(ta.getBoolean(R.styleable.SearchLayout_haveCondition,false));
-        haveConditionLine = new ObservableField<>(ta.getBoolean(R.styleable.SearchLayout_haveConditionLine,false));
-        menuText = new ObservableField<>(ta.getString(R.styleable.SearchLayout_menuText));
-        hintSearchText = new ObservableField<>(ta.getString(R.styleable.SearchLayout_hintText));
-        conditionText = new ObservableField<>(ta.getString(R.styleable.SearchLayout_conditionText));
+        haveMenu = new ObservableField<>(ta.getBoolean(R.styleable.SearchLayout_lyn_haveMenu,false));
+        haveMenuImage = new ObservableField<>(ta.getBoolean(R.styleable.SearchLayout_lyn_haveMenuImage,false));
+        haveMenuLine = new ObservableField<>(ta.getBoolean(R.styleable.SearchLayout_lyn_haveMenuLine,false));
+        haveArrow = new ObservableField<>(ta.getBoolean(R.styleable.SearchLayout_lyn_haveArrow,false));
+        haveCondition = new ObservableField<>(ta.getBoolean(R.styleable.SearchLayout_lyn_haveCondition,false));
+        haveConditionLine = new ObservableField<>(ta.getBoolean(R.styleable.SearchLayout_lyn_haveConditionLine,false));
+        menuText = new ObservableField<>(ta.getString(R.styleable.SearchLayout_lyn_menuText));
+        hintSearchText = new ObservableField<>(ta.getString(R.styleable.SearchLayout_lyn_hintText));
+        conditionText = new ObservableField<>(ta.getString(R.styleable.SearchLayout_lyn_conditionText));
 
-        menuTextColor = ta.getColor(R.styleable.SearchLayout_menuTextColor,
+        menuTextColor = ta.getColor(R.styleable.SearchLayout_lyn_menuTextColor,
                 ContextCompat.getColor(getContext(),R.color.colorApp));
 
-        conditionTextColor = ta.getColor(R.styleable.SearchLayout_menuTextColor,
+        conditionTextColor = ta.getColor(R.styleable.SearchLayout_lyn_menuTextColor,
                 ContextCompat.getColor(getContext(),R.color.colorApp));
 
-        menuLineColor = ta.getColor(R.styleable.SearchLayout_menuLineColor,
+        menuLineColor = ta.getColor(R.styleable.SearchLayout_lyn_menuLineColor,
                 ContextCompat.getColor(getContext(),R.color.colorWhite));
 
-        conditionLineColor = ta.getColor(R.styleable.SearchLayout_conditionLineColor,
+        conditionLineColor = ta.getColor(R.styleable.SearchLayout_lyn_conditionLineColor,
                 ContextCompat.getColor(getContext(),R.color.colorWhite));
 
         Drawable tempBtp = new BitmapDrawable(getResources(), BitmapFactory.decodeResource(getResources(), R.drawable.icon_onimg_default));
-        Drawable bd = ta.getDrawable(R.styleable.SearchLayout_menuImage);
+        Drawable bd = ta.getDrawable(R.styleable.SearchLayout_lyn_menuImage);
         if(bd == null){
             menuDrawable = tempBtp;
         }else{
             menuDrawable = bd;
         }
 
-        bd = ta.getDrawable(R.styleable.SearchLayout_arrow_image);
+        bd = ta.getDrawable(R.styleable.SearchLayout_lyn_arrow_image);
         if(bd == null){
             arrowDrawable = tempBtp;
         }else{
             arrowDrawable = bd;
         }
         tempBtp = new BitmapDrawable(getResources(), BitmapFactory.decodeResource(getResources(), R.color.colorWhite));
-        bd = ta.getDrawable(R.styleable.SearchLayout_searchBackgroundColor);
+        bd = ta.getDrawable(R.styleable.SearchLayout_lyn_searchBackgroundColor);
         if(bd == null){
             searchBg = tempBtp;
         }else{

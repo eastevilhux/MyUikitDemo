@@ -43,25 +43,25 @@ public class ExhibitionLayout extends FrameLayout {
         super(context, attrs);
         TypedArray ta = context.obtainStyledAttributes(attrs, R.styleable.ExhibitionLayout);
 
-        haveImage = new ObservableField<>(ta.getBoolean(R.styleable.ExhibitionLayout_haveImage,false));
-        contentText = new ObservableField<>(ta.getString(R.styleable.ExhibitionLayout_contentText));
-        haveItem = new ObservableField<>(ta.getBoolean(R.styleable.ExhibitionLayout_haveItem,false));
-        itemText = new ObservableField<>(ta.getString(R.styleable.ExhibitionLayout_itemText));
-        haveMenu = new ObservableField<>(ta.getBoolean(R.styleable.ExhibitionLayout_haveMenu,false));
-        menuText = new ObservableField<>(ta.getString(R.styleable.ExhibitionLayout_menuText));
-        haveItemImage = new ObservableField<>(ta.getBoolean(R.styleable.ExhibitionLayout_haveItemImage,false));
-        haveArrow = new ObservableField<>(ta.getBoolean(R.styleable.ExhibitionLayout_haveArrow,false));
+        haveImage = new ObservableField<>(ta.getBoolean(R.styleable.ExhibitionLayout_lyn_haveImage,false));
+        contentText = new ObservableField<>(ta.getString(R.styleable.ExhibitionLayout_lyn_contentText));
+        haveItem = new ObservableField<>(ta.getBoolean(R.styleable.ExhibitionLayout_lyn_haveItem,false));
+        itemText = new ObservableField<>(ta.getString(R.styleable.ExhibitionLayout_lyn_itemText));
+        haveMenu = new ObservableField<>(ta.getBoolean(R.styleable.ExhibitionLayout_lyn_haveMenu,false));
+        menuText = new ObservableField<>(ta.getString(R.styleable.ExhibitionLayout_lyn_menuText));
+        haveItemImage = new ObservableField<>(ta.getBoolean(R.styleable.ExhibitionLayout_lyn_haveItemImage,false));
+        haveArrow = new ObservableField<>(ta.getBoolean(R.styleable.ExhibitionLayout_lyn_haveArrow,false));
 
         Drawable tempBtp = new BitmapDrawable(getResources(),BitmapFactory.decodeResource(getResources(), R.drawable.icon_onimg_default));
 
-        Drawable bd = ta.getDrawable(R.styleable.ExhibitionLayout_exhibition_image);
+        Drawable bd = ta.getDrawable(R.styleable.ExhibitionLayout_lyn_exhibition_image);
         if(bd == null){
             image = tempBtp;
         }else{
             image = bd;
         }
 
-        bd = ta.getDrawable(R.styleable.ExhibitionLayout_item_image);
+        bd = ta.getDrawable(R.styleable.ExhibitionLayout_lyn_item_image);
         if(bd == null){
             bd = tempBtp;
         }else{
@@ -69,7 +69,7 @@ public class ExhibitionLayout extends FrameLayout {
         }
 
         tempBtp = new BitmapDrawable(getResources(),BitmapFactory.decodeResource(getResources(), R.drawable.icon_default_arrow));
-        bd = ta.getDrawable(R.styleable.ExhibitionLayout_arrow_image);
+        bd = ta.getDrawable(R.styleable.ExhibitionLayout_lyn_arrow_image);
         if(bd == null){
             arrowImage = tempBtp;
         }else{

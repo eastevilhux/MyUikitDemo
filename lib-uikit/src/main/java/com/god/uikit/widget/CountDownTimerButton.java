@@ -74,13 +74,13 @@ public class CountDownTimerButton extends TextView {
         TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.CountdownButton);
 
         //获取定义的倒计时时间
-        mCountDownMillis = typedArray.getInt(R.styleable.CountdownButton_countDownMillis,6000);
+        mCountDownMillis = typedArray.getInt(R.styleable.CountdownButton_lyn_countDownMillis,6000);
 
-        status = typedArray.getInteger(R.styleable.CountdownButton_status,1);
+        status = typedArray.getInteger(R.styleable.CountdownButton_lyn_status,1);
         unable = status == 1 ? true : false;
 
-        usableColor = typedArray.getColor(R.styleable.CountdownButton_usableColor, Color.BLACK);
-        unusableColor = typedArray.getColor(R.styleable.CountdownButton_unusableColor, Color.GRAY);
+        usableColor = typedArray.getColor(R.styleable.CountdownButton_lyn_usableColor, Color.BLACK);
+        unusableColor = typedArray.getColor(R.styleable.CountdownButton_lyn_unusableColor, Color.GRAY);
 
         typedArray.recycle();
 

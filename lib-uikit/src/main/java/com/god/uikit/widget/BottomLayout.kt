@@ -62,18 +62,18 @@ class BottomLayout : FrameLayout {
     ) : super(context!!, attributeSet) {
         var ta = context.obtainStyledAttributes(attributeSet, R.styleable.BottomLayout);
 
-        haveLine.set(ta.getBoolean(R.styleable.BottomLayout_haveLine,false));
+        haveLine.set(ta.getBoolean(R.styleable.BottomLayout_lyn_haveLine,false));
 
         textMap = ObservableArrayMap<String, String>()
-        text1 = ta.getString(R.styleable.BottomLayout_itemText_1)
-        text2 = ta.getString(R.styleable.BottomLayout_itemText_2)
-        text3 = ta.getString(R.styleable.BottomLayout_itemText_3)
+        text1 = ta.getString(R.styleable.BottomLayout_lyn_itemText_1)
+        text2 = ta.getString(R.styleable.BottomLayout_lyn_itemText_2)
+        text3 = ta.getString(R.styleable.BottomLayout_lyn_itemText_3)
         textMap!!["text1"] = text1
         textMap!!["text2"] = text2
         textMap!!["text3"] = text3
 
         //默认3个底部导航栏
-        itemNumbers = ObservableField(ta.getInt(R.styleable.BottomLayout_itemNumbers,3));
+        itemNumbers = ObservableField(ta.getInt(R.styleable.BottomLayout_lyn_itemNumbers,3));
 
         val tempBtp: Drawable = BitmapDrawable(
             BitmapFactory.decodeResource(
@@ -83,41 +83,41 @@ class BottomLayout : FrameLayout {
         )
         imageMap = ObservableArrayMap();
 
-        var bd = ta.getDrawable(R.styleable.BottomLayout_iconSrc_sel_1)
+        var bd = ta.getDrawable(R.styleable.BottomLayout_lyn_iconSrc_sel_1)
         if(bd == null){
             iconSel1 = tempBtp;
         }else{
             iconSel1 = bd;
         }
-        bd = ta.getDrawable(R.styleable.BottomLayout_iconSrc_nor_1);
+        bd = ta.getDrawable(R.styleable.BottomLayout_lyn_iconSrc_nor_1);
         if(bd == null){
             iconNor1 = tempBtp;
         }else{
             iconNor1 = bd;
         }
 
-        bd = ta.getDrawable(R.styleable.BottomLayout_iconSrc_sel_2);
+        bd = ta.getDrawable(R.styleable.BottomLayout_lyn_iconSrc_sel_2);
         if(bd == null){
             iconSel2 = tempBtp;
         }else{
             iconSel2 = bd;
         }
 
-        bd = ta.getDrawable(R.styleable.BottomLayout_iconSrc_nor_2);
+        bd = ta.getDrawable(R.styleable.BottomLayout_lyn_iconSrc_nor_2);
         if(bd == null){
             iconNor2 = tempBtp;
         }else{
             iconNor2 = bd;
         }
 
-        bd = ta.getDrawable(R.styleable.BottomLayout_iconSrc_sel_3);
+        bd = ta.getDrawable(R.styleable.BottomLayout_lyn_iconSrc_sel_3);
         if(bd == null){
             iconSel3 = tempBtp;
         }else{
             iconSel3 = bd;
         }
 
-        bd = ta.getDrawable(R.styleable.BottomLayout_iconSrc_nor_3);
+        bd = ta.getDrawable(R.styleable.BottomLayout_lyn_iconSrc_nor_3);
         if(bd == null){
             iconNor3 = tempBtp;
         }else{
@@ -131,14 +131,14 @@ class BottomLayout : FrameLayout {
         imageMap["icon3nor"] = iconNor3;
 
         if(itemNumbers.get()!! > 3) {
-            bd = ta.getDrawable(R.styleable.BottomLayout_iconSrc_sel_4);
+            bd = ta.getDrawable(R.styleable.BottomLayout_lyn_iconSrc_sel_4);
             if(bd == null){
                 iconSel4 =  tempBtp;
             }else{
                 iconSel4 = bd;
             }
             imageMap["icon4sel"] = iconSel4;
-            bd = ta.getDrawable(R.styleable.BottomLayout_iconSrc_nor_4);
+            bd = ta.getDrawable(R.styleable.BottomLayout_lyn_iconSrc_nor_4);
             if(bd == null){
                 iconNor4 = tempBtp;
             }else{
@@ -146,12 +146,12 @@ class BottomLayout : FrameLayout {
             }
             imageMap["icon4nor"] = iconNor4;
 
-            text4 = ta.getString(R.styleable.BottomLayout_itemText_4)
+            text4 = ta.getString(R.styleable.BottomLayout_lyn_itemText_4)
             textMap!!["text4"] = text4
         }
 
         if(itemNumbers.get()!! > 4){
-            bd = ta.getDrawable(R.styleable.BottomLayout_iconSrc_sel_5);
+            bd = ta.getDrawable(R.styleable.BottomLayout_lyn_iconSrc_sel_5);
             if(bd == null){
                 iconSel5 = tempBtp;
             }else{
@@ -159,7 +159,7 @@ class BottomLayout : FrameLayout {
             }
             imageMap["icon5sel"] = iconSel5
 
-            bd = ta.getDrawable(R.styleable.BottomLayout_iconSrc_nor_5);
+            bd = ta.getDrawable(R.styleable.BottomLayout_lyn_iconSrc_nor_5);
             if(bd == null){
                 iconNor5 = tempBtp;
             }else{
@@ -167,20 +167,20 @@ class BottomLayout : FrameLayout {
             }
             imageMap["icon5nor"] = iconNor5
 
-            text5 = ta.getString(R.styleable.BottomLayout_itemText_5)
+            text5 = ta.getString(R.styleable.BottomLayout_lyn_itemText_5)
             textMap!!["text5"] = text5
         }
 
         selColor = ta.getColor(
-            R.styleable.BottomLayout_selTextColor,
+            R.styleable.BottomLayout_lyn_selTextColor,
             resources.getColor(R.color.colorApp)
         )
         norColor = ta.getColor(
-            R.styleable.BottomLayout_norTextColor,
+            R.styleable.BottomLayout_lyn_norTextColor,
             resources.getColor(R.color.colorHint)
         )
 
-        lineColor = ta.getColor(R.styleable.BottomLayout_lineColor,
+        lineColor = ta.getColor(R.styleable.BottomLayout_lyn_lineColor,
             resources.getColor(R.color.colorLineLight));
 
         ta.recycle();

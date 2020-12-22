@@ -43,18 +43,18 @@ public class TopdownLayout extends FrameLayout {
         super(context, attrs);
         TypedArray ta = context.obtainStyledAttributes(attrs, R.styleable.TopdownLayout);
         Drawable tempBtp = new BitmapDrawable(getResources(), BitmapFactory.decodeResource(getResources(), R.drawable.icon_default_arrow));
-        Drawable bd = ta.getDrawable(R.styleable.TopdownLayout_iconSrc);
+        Drawable bd = ta.getDrawable(R.styleable.TopdownLayout_lyn_iconSrc);
         if(bd == null){
             image = tempBtp;
         }else{
             image = bd;
         }
-        imageSize = ta.getInteger(R.styleable.TopdownLayout_imageSize,60);
+        imageSize = ta.getInteger(R.styleable.TopdownLayout_lyn_imageSize,60);
         imageSize = ViewUtil.Companion.dip2px(context,imageSize);
 
-        text = new ObservableField<>(ta.getString(R.styleable.TopdownLayout_itemText));
+        text = new ObservableField<>(ta.getString(R.styleable.TopdownLayout_lyn_itemText));
 
-        itemTextColor = ta.getColor(R.styleable.TopdownLayout_itemTextColor,
+        itemTextColor = ta.getColor(R.styleable.TopdownLayout_lyn_itemTextColor,
                 ContextCompat.getColor(getContext(),R.color.colorApp));
 
         ta.recycle();

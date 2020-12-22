@@ -48,34 +48,34 @@ public class SelectitemLayout extends FrameLayout {
         TypedArray ta = context.obtainStyledAttributes(attrs, R.styleable.SelectitemLayout);
 
         Drawable tempBtp = new BitmapDrawable(getResources(), BitmapFactory.decodeResource(getResources(), R.drawable.icon_default_arrow));
-        Drawable bd = ta.getDrawable(R.styleable.SelectitemLayout_arrow_image);
+        Drawable bd = ta.getDrawable(R.styleable.SelectitemLayout_lyn_arrow_image);
         if(bd == null){
             arrowImg = tempBtp;
         }else{
             arrowImg = bd;
         }
         tempBtp = new BitmapDrawable(getResources(), BitmapFactory.decodeResource(getResources(), R.drawable.icon_onimg_default));
-        bd = ta.getDrawable(R.styleable.SelectitemLayout_item_image);
+        bd = ta.getDrawable(R.styleable.SelectitemLayout_lyn_item_image);
         if(bd == null){
             itemImg = tempBtp;
         }else{
             itemImg = bd;
         }
-        haveItem = new ObservableField<>(ta.getBoolean(R.styleable.SelectitemLayout_haveItem,false));
-        haveItemImage = new ObservableField<>(ta.getBoolean(R.styleable.SelectitemLayout_haveItemImage,false));
-        haveArrow = new ObservableField<>(ta.getBoolean(R.styleable.SelectitemLayout_haveArrow,true));
-        haveContent = new ObservableField<>(ta.getBoolean(R.styleable.SelectitemLayout_haveContent,true));
-        itemText = new ObservableField<>(ta.getString(R.styleable.SelectitemLayout_itemText));
-        contentText = new ObservableField<>(ta.getString(R.styleable.SelectitemLayout_contentText));
+        haveItem = new ObservableField<>(ta.getBoolean(R.styleable.SelectitemLayout_lyn_haveItem,false));
+        haveItemImage = new ObservableField<>(ta.getBoolean(R.styleable.SelectitemLayout_lyn_haveItemImage,false));
+        haveArrow = new ObservableField<>(ta.getBoolean(R.styleable.SelectitemLayout_lyn_haveArrow,true));
+        haveContent = new ObservableField<>(ta.getBoolean(R.styleable.SelectitemLayout_lyn_haveContent,true));
+        itemText = new ObservableField<>(ta.getString(R.styleable.SelectitemLayout_lyn_itemText));
+        contentText = new ObservableField<>(ta.getString(R.styleable.SelectitemLayout_lyn_contentText));
 
-        itemTextColor = ta.getColor(R.styleable.SelectitemLayout_itemTextColor,
+        itemTextColor = ta.getColor(R.styleable.SelectitemLayout_lyn_itemTextColor,
                 ContextCompat.getColor(getContext(),R.color.colorApp));
 
-        contentTextColor = ta.getColor(R.styleable.SelectitemLayout_contentTextColor,
+        contentTextColor = ta.getColor(R.styleable.SelectitemLayout_lyn_contentTextColor,
                 ContextCompat.getColor(getContext(),R.color.colorApp));
 
 
-        int gravity = ta.getInteger(R.styleable.SelectitemLayout_content_gravity,1);
+        int gravity = ta.getInteger(R.styleable.SelectitemLayout_lyn_content_gravity,1);
         switch (gravity){
             case 1:
                 contentGravity = new ObservableField<>(Gravity.LEFT|Gravity.CENTER_VERTICAL);

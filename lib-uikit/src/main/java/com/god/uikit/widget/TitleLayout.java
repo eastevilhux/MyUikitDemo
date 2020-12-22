@@ -63,35 +63,35 @@ public class TitleLayout extends FrameLayout {
 
         TypedArray ta = context.obtainStyledAttributes(attrs, R.styleable.TitleLayout);
 
-        titleColor =  new ObservableField<>(ta.getColor(R.styleable.TitleLayout_titleTextColor,
+        titleColor =  new ObservableField<>(ta.getColor(R.styleable.TitleLayout_lyn_titleTextColor,
                 getResources().getColor(R.color.colorWhite)));
 
-        menuColor = new ObservableField<>(ta.getColor(R.styleable.TitleLayout_menuTextColor,
+        menuColor = new ObservableField<>(ta.getColor(R.styleable.TitleLayout_lyn_menuTextColor,
                 getResources().getColor(R.color.colorWhite)));
 
-        backTextColor = ta.getColor(R.styleable.TitleLayout_backTextColor,getResources().getColor(R.color.colorBlack));
+        backTextColor = ta.getColor(R.styleable.TitleLayout_lyn_backTextColor,getResources().getColor(R.color.colorBlack));
 
-        BitmapDrawable bd = (BitmapDrawable) ta.getDrawable(R.styleable.TitleLayout_iconBack);
+        BitmapDrawable bd = (BitmapDrawable) ta.getDrawable(R.styleable.TitleLayout_lyn_iconBack);
         if (bd != null) {
             backIcon  = bd.getBitmap();
         } else {
             backIcon = BitmapFactory.decodeResource(getResources(), R.drawable.back_arrow);
         }
 
-        bd = (BitmapDrawable) ta.getDrawable(R.styleable.TitleLayout_menuImage);
+        bd = (BitmapDrawable) ta.getDrawable(R.styleable.TitleLayout_lyn_menuImage);
         if(bd != null){
             imageIcon = bd.getBitmap();
         }else{
             imageIcon = BitmapFactory.decodeResource(getResources(), R.drawable.icon_onimg_default);
         }
-        title = new ObservableField<>(ta.getString(R.styleable.TitleLayout_titleText));
-        menu = new ObservableField<>(ta.getString(R.styleable.TitleLayout_menuText));
+        title = new ObservableField<>(ta.getString(R.styleable.TitleLayout_lyn_titleText));
+        menu = new ObservableField<>(ta.getString(R.styleable.TitleLayout_lyn_menuText));
 
-        menuType = new ObservableField<>(ta.getInt(R.styleable.TitleLayout_menuType,0));
+        menuType = new ObservableField<>(ta.getInt(R.styleable.TitleLayout_lyn_menuType,0));
 
-        backText = new ObservableField<>(ta.getString(R.styleable.TitleLayout_backText));
+        backText = new ObservableField<>(ta.getString(R.styleable.TitleLayout_lyn_backText));
 
-        iconBackType = new ObservableField<>(ta.getInt(R.styleable.TitleLayout_iconBackType,1));
+        iconBackType = new ObservableField<>(ta.getInt(R.styleable.TitleLayout_lyn_iconBackType,1));
 
         ta.recycle();
         init();

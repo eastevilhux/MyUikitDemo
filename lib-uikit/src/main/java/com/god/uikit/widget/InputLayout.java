@@ -60,31 +60,31 @@ public class InputLayout extends FrameLayout implements CountDownTimerButton.OnC
     public InputLayout(@NonNull Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
         TypedArray ta = context.obtainStyledAttributes(attrs, R.styleable.InputLayout);
-        itemText = new ObservableField<>(ta.getString(R.styleable.InputLayout_itemText));
-        hintText = new ObservableField<>(ta.getString(R.styleable.InputLayout_hintText));
-        haveLine = new ObservableField<>(ta.getBoolean(R.styleable.InputLayout_haveLine,false));
-        haveMenu = new ObservableField<>(ta.getBoolean(R.styleable.InputLayout_haveMenu,false));
+        itemText = new ObservableField<>(ta.getString(R.styleable.InputLayout_lyn_itemText));
+        hintText = new ObservableField<>(ta.getString(R.styleable.InputLayout_lyn_hintText));
+        haveLine = new ObservableField<>(ta.getBoolean(R.styleable.InputLayout_lyn_haveLine,false));
+        haveMenu = new ObservableField<>(ta.getBoolean(R.styleable.InputLayout_lyn_haveMenu,false));
         if(haveMenu.get()){
-            menuText = new ObservableField<>(ta.getString(R.styleable.InputLayout_itemMenuText));
+            menuText = new ObservableField<>(ta.getString(R.styleable.InputLayout_lyn_itemMenuText));
         }
 
-        itemTextColor = ta.getColor(R.styleable.InputLayout_itemTextColor,
+        itemTextColor = ta.getColor(R.styleable.InputLayout_lyn_itemTextColor,
                 ContextCompat.getColor(getContext(),R.color.colorApp));
 
-        editTextColor = ta.getColor(R.styleable.InputLayout_inputTextColor,
+        editTextColor = ta.getColor(R.styleable.InputLayout_lyn_inputTextColor,
                 ContextCompat.getColor(getContext(),R.color.colorApp));
 
-        hintColor = ta.getColor(R.styleable.InputLayout_hintColor,
+        hintColor = ta.getColor(R.styleable.InputLayout_lyn_hintColor,
                 ContextCompat.getColor(getContext(),R.color.colorHint));
 
-        lineColor = ta.getColor(R.styleable.InputLayout_lineColor,
+        lineColor = ta.getColor(R.styleable.InputLayout_lyn_lineColor,
                 ContextCompat.getColor(getContext(),R.color.colorLine));
 
-        menuColor = ta.getColor(R.styleable.InputLayout_menuTextColor,
+        menuColor = ta.getColor(R.styleable.InputLayout_lyn_menuTextColor,
                 ContextCompat.getColor(getContext(),R.color.colorWhite));
 
-        menuBack = ta.getDrawable(R.styleable.InputLayout_menuBackground);
-        inputType = ta.getInt(R.styleable.InputLayout_inputType,0);
+        menuBack = ta.getDrawable(R.styleable.InputLayout_lyn_menuBackground);
+        inputType = ta.getInt(R.styleable.InputLayout_lyn_inputType,0);
 
         ta.recycle();
         initView();

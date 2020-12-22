@@ -49,43 +49,43 @@ class IconTextImageLayout : FrameLayout{
         attributeSet: AttributeSet?
     ) : super(context!!, attributeSet) {
         var ta = context!!.obtainStyledAttributes(attributeSet,R.styleable.IconTextImageLayout);
-        haveIcon.set(ta.getBoolean(R.styleable.IconTextImageLayout_isHaveIcon,false));
+        haveIcon.set(ta.getBoolean(R.styleable.IconTextImageLayout_lyn_isHaveIcon,false));
         if(haveIcon.get()!!){
             tempBd = BitmapDrawable(
                 context.resources,
                 BitmapFactory.decodeResource(resources, R.drawable.icon_no_data_default)
             )
-            iconWidht = ta.getDimension(R.styleable.IconTextImageLayout_icon_width,iconWidht.toFloat()).toInt();
-            iconHeight = ta.getDimension(R.styleable.IconTextImageLayout_icon_width,iconHeight.toFloat()).toInt();
-            var iconSrc = ta.getDrawable(R.styleable.IconTextImageLayout_icon_src);
+            iconWidht = ta.getDimension(R.styleable.IconTextImageLayout_lyn_icon_width,iconWidht.toFloat()).toInt();
+            iconHeight = ta.getDimension(R.styleable.IconTextImageLayout_lyn_icon_width,iconHeight.toFloat()).toInt();
+            var iconSrc = ta.getDrawable(R.styleable.IconTextImageLayout_lyn_icon_src);
             iconBip = iconSrc
                 ?.let { iconSrc}
                 ?: tempBd;
         }
 
-        haveTitle.set(ta.getBoolean(R.styleable.IconTextImageLayout_isHaveTitle,false));
+        haveTitle.set(ta.getBoolean(R.styleable.IconTextImageLayout_lyn_isHaveTitle,false));
         if(haveTitle.get()!!){
-            titleColor = ta.getColor(R.styleable.IconTextImageLayout_title_color, defTitleColor);
-            titleText.set(ta.getString(R.styleable.IconTextImageLayout_title_text));
+            titleColor = ta.getColor(R.styleable.IconTextImageLayout_lyn_title_color, defTitleColor);
+            titleText.set(ta.getString(R.styleable.IconTextImageLayout_lyn_title_text));
         }
-        haveSubtitle.set(ta.getBoolean(R.styleable.IconTextImageLayout_isHaveSubtitle,false));
+        haveSubtitle.set(ta.getBoolean(R.styleable.IconTextImageLayout_lyn_isHaveSubtitle,false));
         if(haveSubtitle.get()!!){
-            subtitleColor = ta.getColor(R.styleable.IconTextImageLayout_subtitle_color,defSubtitleColor);
-            subtitleText.set(ta.getString(R.styleable.IconTextImageLayout_subtitle_text));
+            subtitleColor = ta.getColor(R.styleable.IconTextImageLayout_lyn_subtitle_color,defSubtitleColor);
+            subtitleText.set(ta.getString(R.styleable.IconTextImageLayout_lyn_subtitle_text));
         }
 
-        haveContent.set(ta.getBoolean(R.styleable.IconTextImageLayout_haveContent,false));
+        haveContent.set(ta.getBoolean(R.styleable.IconTextImageLayout_lyn_haveContent,false));
         if(haveContent.get()!!){
-            contentText.set(ta.getString(R.styleable.IconTextLayout_contextText));
-            contentColor = ta.getColor(R.styleable.IconTextLayout_contextTextColor,defTitleColor);
+            contentText.set(ta.getString(R.styleable.IconTextLayout_lyn_contextText));
+            contentColor = ta.getColor(R.styleable.IconTextLayout_lyn_contextTextColor,defTitleColor);
         }
-        haveArrow.set(ta.getBoolean(R.styleable.IconTextImageLayout_have_arrow,false));
+        haveArrow.set(ta.getBoolean(R.styleable.IconTextImageLayout_lyn_have_arrow,false));
         if(haveArrow.get()!!){
             var defArrow = BitmapDrawable(
                 context.resources,
                 BitmapFactory.decodeResource(resources, R.drawable.icon_arrow_def)
             )
-            arrowBd = ta.getDrawable(R.styleable.IconTextImageLayout_arrow_src);
+            arrowBd = ta.getDrawable(R.styleable.IconTextImageLayout_lyn_arrow_src);
             arrowBd = arrowBd?.let { arrowBd } ?: defArrow;
         }
         ta.recycle();

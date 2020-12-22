@@ -145,38 +145,38 @@ public class EastCodeView extends EditText {
         TypedArray typedArray =
                 context.obtainStyledAttributes(attrs, R.styleable.EastCodeView);
 
-        mHeight = typedArray.getDimensionPixelSize(R.styleable.EastCodeView_height, mHeight);
-        mWidth = typedArray.getDimensionPixelSize(R.styleable.EastCodeView_width, mWidth);
-        mLineWidth = typedArray.getDimensionPixelSize(R.styleable.EastCodeView_lineWidth, mLineWidth);
-        mLineColor = typedArray.getColor(R.styleable.EastCodeView_lineColor, mLineColor);
-        mFillColor = typedArray.getColor(R.styleable.EastCodeView_fillColor, mFillColor);
+        mHeight = typedArray.getDimensionPixelSize(R.styleable.EastCodeView_lyn_height, mHeight);
+        mWidth = typedArray.getDimensionPixelSize(R.styleable.EastCodeView_lyn_width, mWidth);
+        mLineWidth = typedArray.getDimensionPixelSize(R.styleable.EastCodeView_lyn_lineWidth, mLineWidth);
+        mLineColor = typedArray.getColor(R.styleable.EastCodeView_lyn_lineColor, mLineColor);
+        mFillColor = typedArray.getColor(R.styleable.EastCodeView_lyn_fillColor, mFillColor);
 
-        mFocusLineWidth = typedArray.getDimensionPixelSize(R.styleable.EastCodeView_focusLineWidth, mLineWidth);
-        mFocusLineColor = typedArray.getColor(R.styleable.EastCodeView_focusLColor, mFocusLineColor);
-        mFocusFillColor = typedArray.getColor(R.styleable.EastCodeView_focusFillColor, mFocusFillColor);
+        mFocusLineWidth = typedArray.getDimensionPixelSize(R.styleable.EastCodeView_lyn_focusLineWidth, mLineWidth);
+        mFocusLineColor = typedArray.getColor(R.styleable.EastCodeView_lyn_focusLColor, mFocusLineColor);
+        mFocusFillColor = typedArray.getColor(R.styleable.EastCodeView_lyn_focusFillColor, mFocusFillColor);
 
-        mEmployLineWidth = typedArray.getDimensionPixelSize(R.styleable.EastCodeView_employLineWidth, mLineWidth);
-        mEmployLineColor = typedArray.getColor(R.styleable.EastCodeView_employLColor, mLineColor);
-        mEmployFillColor = typedArray.getColor(R.styleable.EastCodeView_employFillColor, mFillColor);
+        mEmployLineWidth = typedArray.getDimensionPixelSize(R.styleable.EastCodeView_lyn_employLineWidth, mLineWidth);
+        mEmployLineColor = typedArray.getColor(R.styleable.EastCodeView_lyn_employLColor, mLineColor);
+        mEmployFillColor = typedArray.getColor(R.styleable.EastCodeView_lyn_employFillColor, mFillColor);
 
-        mTextColor = typedArray.getColor(R.styleable.EastCodeView_textColor, mTextColor);
-        mTextSize = typedArray.getDimensionPixelSize(R.styleable.EastCodeView_textSize, mTextSize);
+        mTextColor = typedArray.getColor(R.styleable.EastCodeView_lyn_textColor, mTextColor);
+        mTextSize = typedArray.getDimensionPixelSize(R.styleable.EastCodeView_lyn_textSize, mTextSize);
 
-        isConceal = typedArray.getBoolean(R.styleable.EastCodeView_conceal, false);
-        mReplaceString = typedArray.getString(R.styleable.EastCodeView_replaceString);
-        mReplaceDrawable = typedArray.getDrawable(R.styleable.EastCodeView_replaceDrawable);
+        isConceal = typedArray.getBoolean(R.styleable.EastCodeView_lyn_conceal, false);
+        mReplaceString = typedArray.getString(R.styleable.EastCodeView_lyn_replaceString);
+        mReplaceDrawable = typedArray.getDrawable(R.styleable.EastCodeView_lyn_replaceDrawable);
 
-        borderRadius = typedArray.getDimensionPixelSize(R.styleable.EastCodeView_borderRadius, borderRadius);
-        circleColor = typedArray.getColor(R.styleable.EastCodeView_circleColor, mTextColor);
-        circleRadius = typedArray.getDimensionPixelSize(R.styleable.EastCodeView_circleRadius, mHeight / 8);
-        count = typedArray.getInt(R.styleable.EastCodeView_count, 6);
-        isContinuous = typedArray.getBoolean(R.styleable.EastCodeView_isContinuous, true);
-        intervalWidth = typedArray.getDimensionPixelSize(R.styleable.EastCodeView_intervalWidth, 40);
-        isContinuousRepeatChar = typedArray.getBoolean(R.styleable.EastCodeView_isContinuousRepeatChar, false);
-        isContinuousChar = typedArray.getBoolean(R.styleable.EastCodeView_isContinuousChar, false);
-        isInvokingKeyboard = typedArray.getBoolean(R.styleable.EastCodeView_isInvokingKeyboard, true);
+        borderRadius = typedArray.getDimensionPixelSize(R.styleable.EastCodeView_lyn_borderRadius, borderRadius);
+        circleColor = typedArray.getColor(R.styleable.EastCodeView_lyn_circleColor, mTextColor);
+        circleRadius = typedArray.getDimensionPixelSize(R.styleable.EastCodeView_lyn_circleRadius, mHeight / 8);
+        count = typedArray.getInt(R.styleable.EastCodeView_lyn_count, 6);
+        isContinuous = typedArray.getBoolean(R.styleable.EastCodeView_lyn_isContinuous, true);
+        intervalWidth = typedArray.getDimensionPixelSize(R.styleable.EastCodeView_lyn_intervalWidth, 40);
+        isContinuousRepeatChar = typedArray.getBoolean(R.styleable.EastCodeView_lyn_isContinuousRepeatChar, false);
+        isContinuousChar = typedArray.getBoolean(R.styleable.EastCodeView_lyn_isContinuousChar, false);
+        isInvokingKeyboard = typedArray.getBoolean(R.styleable.EastCodeView_lyn_isInvokingKeyboard, true);
 
-        isPassword = typedArray.getBoolean(R.styleable.EastCodeView_isPassword,false);
+        isPassword = typedArray.getBoolean(R.styleable.EastCodeView_lyn_isPassword,false);
 
         setBackgroundColor(Color.TRANSPARENT);
 

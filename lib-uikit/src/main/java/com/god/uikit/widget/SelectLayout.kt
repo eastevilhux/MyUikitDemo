@@ -61,20 +61,20 @@ class SelectLayout : FrameLayout {
     private fun initAttrs(attrs: AttributeSet) {
         var ta = context!!.obtainStyledAttributes(attrs,R.styleable.SelectLayout);
 
-        haveIcon.set(ta.getBoolean(R.styleable.SelectLayout_isHaveIcon,false));
-        haveItem.set(ta.getBoolean(R.styleable.SelectLayout_haveItem,true));
-        haveContent.set(ta.getBoolean(R.styleable.SelectLayout_haveContent,false));
-        haveArrow.set(ta.getBoolean(R.styleable.SelectLayout_have_img_arrow,true));
-        haveMenu.set(ta.getBoolean(R.styleable.SelectLayout_haveMenu,false));
+        haveIcon.set(ta.getBoolean(R.styleable.SelectLayout_lyn_isHaveIcon,false));
+        haveItem.set(ta.getBoolean(R.styleable.SelectLayout_lyn_haveItem,true));
+        haveContent.set(ta.getBoolean(R.styleable.SelectLayout_lyn_haveContent,false));
+        haveArrow.set(ta.getBoolean(R.styleable.SelectLayout_lyn_have_img_arrow,true));
+        haveMenu.set(ta.getBoolean(R.styleable.SelectLayout_lyn_haveMenu,false));
 
-        itemText.set(ta.getString(R.styleable.SelectLayout_itemText));
-        contentText.set(ta.getString(R.styleable.SelectLayout_contentText));
-        menuText.set(ta.getString(R.styleable.SelectLayout_menuText));
+        itemText.set(ta.getString(R.styleable.SelectLayout_lyn_itemText));
+        contentText.set(ta.getString(R.styleable.SelectLayout_lyn_contentText));
+        menuText.set(ta.getString(R.styleable.SelectLayout_lyn_menuText));
 
-        itemTextColor = ta.getColor(R.styleable.SelectLayout_itemTextColor, Color.rgb(150,150,150));
-        contentTextColor = ta.getColor(R.styleable.SelectLayout_contentTextColor, Color.rgb(55,55,55));
-        menuTextColor = ta.getColor(R.styleable.SelectLayout_menuTextColor, Color.rgb(55,55,55));
-        arrowImgSize = ta.getDimensionPixelSize(R.styleable.SelectLayout_arrowImgSize,0);
+        itemTextColor = ta.getColor(R.styleable.SelectLayout_lyn_itemTextColor, Color.rgb(150,150,150));
+        contentTextColor = ta.getColor(R.styleable.SelectLayout_lyn_contentTextColor, Color.rgb(55,55,55));
+        menuTextColor = ta.getColor(R.styleable.SelectLayout_lyn_menuTextColor, Color.rgb(55,55,55));
+        arrowImgSize = ta.getDimensionPixelSize(R.styleable.SelectLayout_lyn_arrowImgSize,0);
         if(arrowImgSize == 0){
             arrowImgSize = 35.dip2Px();
         }
@@ -84,7 +84,7 @@ class SelectLayout : FrameLayout {
                 context.resources,
                 BitmapFactory.decodeResource(resources, R.drawable.icon_arrow_def)
             )
-            arrowBd = ta.getDrawable(R.styleable.SelectLayout_arrow_image);
+            arrowBd = ta.getDrawable(R.styleable.SelectLayout_lyn_arrow_image);
             arrowBd = arrowBd?.let { arrowBd } ?: defArrow;
         }
 
@@ -93,11 +93,11 @@ class SelectLayout : FrameLayout {
                 context.resources,
                 BitmapFactory.decodeResource(resources,R.drawable.icon_no_data_default)
             );
-            iconBd = ta.getDrawable(R.styleable.SelectLayout_iconSrc);
+            iconBd = ta.getDrawable(R.styleable.SelectLayout_lyn_iconSrc);
             iconBd = iconBd?.let { iconBd } ?: defIcon;
         }
 
-        val gravity = ta.getInteger(R.styleable.SelectLayout_content_gravity, 1)
+        val gravity = ta.getInteger(R.styleable.SelectLayout_lyn_content_gravity, 1)
         when (gravity) {
             1 -> contentGravity.set(Gravity.LEFT or Gravity.CENTER_VERTICAL);
             2 -> contentGravity.set(Gravity.CENTER);
