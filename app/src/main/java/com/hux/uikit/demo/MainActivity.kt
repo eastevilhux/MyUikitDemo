@@ -1,10 +1,10 @@
 package com.hux.uikit.demo
 
 import android.graphics.Color
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.os.Message
 import android.widget.TextView
+import androidx.appcompat.app.AppCompatActivity
+import com.god.uikit.commons.GlideApp
 import com.god.uikit.entity.ItemText
 import com.god.uikit.widget.dialog.CalendarDialog
 import com.god.uikit.widget.dialog.ListDialog
@@ -66,5 +66,7 @@ class MainActivity : AppCompatActivity() {
                 .build();
             numberpsdDialog.show();
         }
+
     }
+
 }
