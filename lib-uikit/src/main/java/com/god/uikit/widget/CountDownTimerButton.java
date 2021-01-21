@@ -177,8 +177,8 @@ public class CountDownTimerButton extends TextView {
                             if(onCountdownListener != null)
                                 onCountdownListener.onTime(mCountDownMillis,CountDownTimerButton.this);
                         }else{
-                            handler.removeCallbacksAndMessages(null);
                             handler.sendEmptyMessage(MSG_WHAT_STOP);
+                            handler.removeCallbacksAndMessages(null);
                         }
                         break;
                     default:
