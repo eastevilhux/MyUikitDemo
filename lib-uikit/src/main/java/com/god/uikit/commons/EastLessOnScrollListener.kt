@@ -51,6 +51,19 @@ class EastLessOnScrollListener : RecyclerView.OnScrollListener() {
         isUpScroll = dy > 0;
     }
 
+    fun setOnScrollListener(onScrollListener: OnLoadMoreListener){
+        this.onScrollListener = onScrollListener;
+    }
+
+    fun loadMore(loadMore:((page:Int)->Unit)){
+        this.onLoadMore = loadMore;
+    }
+
+    fun onRefresh(onRefresh : ()->Unit){
+        this.onRefresh = onRefresh;
+    }
+
+
 
     interface OnLoadMoreListener{
 
