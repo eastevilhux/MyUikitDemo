@@ -28,17 +28,17 @@ class EastLessOnScrollListener : RecyclerView.OnScrollListener() {
                 val itemCount: Int = manager.getItemCount() //总数
                 val lastItemPosition: Int = linearLayoutManager.findLastCompletelyVisibleItemPosition() //最后显示的位置
                 if (lastItemPosition == itemCount - 1 && isUpScroll) {
-                    onScrollListener?.onRefresh();
-                    onRefresh?.let {
-                        it.invoke();
-                    }
-                }
-                val fristItemPosition: Int = linearLayoutManager.findFirstCompletelyVisibleItemPosition() //第一个显示的位置
-                if (fristItemPosition == 0 && !isUpScroll) {
                     currentPage++;
                     onScrollListener?.onLoadMore(currentPage);
                     onLoadMore?.let {
                         it.invoke(currentPage);
+                    }
+                }
+                val fristItemPosition: Int = linearLayoutManager.findFirstCompletelyVisibleItemPosition() //第一个显示的位置
+                if (fristItemPosition == 0 && !isUpScroll) {
+                    onScrollListener?.onRefresh()
+                    onRefresh?.let {
+                        it.invoke();
                     }
                 }
             }
