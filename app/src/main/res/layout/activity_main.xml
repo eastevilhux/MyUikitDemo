@@ -34,4 +34,16 @@
         style="@style/AppTextTheme"
         android:text="number dialog test"/>
 
+    <com.god.uikit.widget.InputLayout
+        android:id="@+id/input_layout"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        app:lyn_itemText="setting_account_mobile"
+        app:lyn_hintText="hint_mobile"
+        app:lyn_itemMenuText="send_msg_code"
+        app:lyn_haveMenu="true"
+        app:lyn_menuBackground="@color/colorPrimary"
+        android:background="@color/colorAccent"
+        app:lyn_inputType="mobile" />
+
 </LinearLayout>

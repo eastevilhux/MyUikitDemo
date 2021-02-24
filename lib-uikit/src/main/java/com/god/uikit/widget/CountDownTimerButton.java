@@ -126,8 +126,7 @@ public class CountDownTimerButton extends TextView {
 
     public void stop(){
         mCountDownMillis = 0;
-        unable = false;
-        handler.sendEmptyMessage(MSG_WHAT_STOP);
+        unable = true;
         setEnabled(true);
         setClickable(true);
         setFocusable(true);
@@ -154,6 +153,7 @@ public class CountDownTimerButton extends TextView {
             if ( weakReference.get() != null ){
                 switch (msg.what){
                     case MSG_WHAT_START:
+                        Log.d("countdown===>","MSG_WHAT_START");
                         //判断时间是否大于0，切当前是否为可用状态
                         if(unable && mCountDownMillis > 0){
                             handler.sendEmptyMessage(MSG_WHAT_DOING);
@@ -162,13 +162,15 @@ public class CountDownTimerButton extends TextView {
                         }
                         break;
                     case MSG_WHAT_STOP:
+                        Log.d("countdown===>","MSG_WHAT_STOP");
                         if(onCountdownListener != null)
                             onCountdownListener.onStop(CountDownTimerButton.this);
                         stop();
+                        handler.removeCallbacksAndMessages(null);
                         break;
                     case MSG_WHAT_DOING:
-                        Log.d("countdown===>",mCountDownMillis+"秒");
-                        if(unable && mCountDownMillis > 0){
+                        Log.d("countdown===>","unable=>"+unable+","+mCountDownMillis+"秒");
+                        if(unable && mCountDownMillis > 1000){
                             setFocusable(false);
                             setEnabled(false);
                             setClickable(false);
@@ -177,8 +179,8 @@ public class CountDownTimerButton extends TextView {
                             if(onCountdownListener != null)
                                 onCountdownListener.onTime(mCountDownMillis,CountDownTimerButton.this);
                         }else{
+                            Log.d("countdown===>","unable=>"+unable+","+mCountDownMillis+"秒,send_MSG_WHAT_STOP");
                             handler.sendEmptyMessage(MSG_WHAT_STOP);
-                            handler.removeCallbacksAndMessages(null);
                         }
                         break;
                     default:

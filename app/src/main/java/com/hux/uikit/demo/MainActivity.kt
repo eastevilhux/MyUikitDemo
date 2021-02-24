@@ -2,17 +2,17 @@ package com.hux.uikit.demo
 
 import android.graphics.Color
 import android.os.Bundle
-import android.widget.ImageView
+import android.util.Log
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
-import com.god.uikit.commons.GlideApp
 import com.god.uikit.entity.ItemText
+import com.god.uikit.widget.InputLayout
 import com.god.uikit.widget.dialog.CalendarDialog
 import com.god.uikit.widget.dialog.ListDialog
 import com.god.uikit.widget.dialog.MessageDialog
 import com.god.uikit.widget.dialog.NumberpsdDialog
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), InputLayout.OnCountdownListener {
     private var calendarDialog : CalendarDialog? = null;
     private var listDialog : ListDialog? = null;
     private var msgDialog : MessageDialog? = null;
@@ -68,6 +68,26 @@ class MainActivity : AppCompatActivity() {
             numberpsdDialog.show();
         }
 
+
+        val layout = findViewById<InputLayout>(R.id.input_layout);
+        layout.setOnInputMenuClickListener {
+            layout.startTime(6000);
+        }
+        layout.onCountdownListener = this;
+
+    }
+
+    override fun onTime(view: TextView?, time: Int) {
+        view?.setText("${time}秒后")
+        Log.d("fuck=>","onTime=>${time}");
+    }
+
+    override fun onStart(view: TextView?) {
+        Log.d("fuck=>","onStart");
+    }
+
+    override fun onStop(view: TextView?) {
+        view?.setText("send msg")
     }
 
 }
