@@ -1,5 +1,7 @@
 package com.god.uikit.commons
 
+import android.annotation.SuppressLint
+import android.util.Log
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.god.uikit.utils.dip2Px
@@ -22,6 +24,7 @@ class EastLessOnScrollListener : RecyclerView.OnScrollListener() {
     var isScroll = false;//手势滑动的位置
     var isUpScroll = false //是否正在上滑标记
 
+    @SuppressLint("LongLogTag")
     override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
         super.onScrollStateChanged(recyclerView, newState)
         val manager = recyclerView.getLayoutManager();
@@ -30,6 +33,7 @@ class EastLessOnScrollListener : RecyclerView.OnScrollListener() {
             if (newState === RecyclerView.SCROLL_STATE_IDLE) { //当前未滑动
                 val itemCount: Int = manager.getItemCount() //总数
                 val lastItemPosition: Int = linearLayoutManager.findLastCompletelyVisibleItemPosition() //最后显示的位置
+                Log.d(TAG,"lastItemPosition==>${lastItemPosition},itemCount==>${itemCount}");
                 if (lastItemPosition == itemCount - 1 && isUpScroll) {
                     currentPage++;
                     onScrollListener?.onLoadMore(currentPage);
@@ -49,8 +53,10 @@ class EastLessOnScrollListener : RecyclerView.OnScrollListener() {
         }
     }
 
+    @SuppressLint("LongLogTag")
     override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
         super.onScrolled(recyclerView, dx, dy)
+        Log.d(TAG,"DX==>${dx},DY==>${dy}");
         if(dy > sideDis){
             // 大于0表示正在向上滑动，小于等于0表示停止或向下滑动
             isUpScroll = dy > 0;
