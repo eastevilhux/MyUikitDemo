@@ -34,7 +34,7 @@ class EastLessOnScrollListener : RecyclerView.OnScrollListener() {
                 val itemCount: Int = manager.getItemCount() //总数
                 val lastItemPosition: Int = linearLayoutManager.findLastCompletelyVisibleItemPosition() //最后显示的位置
                 Log.d(TAG,"lastItemPosition==>${lastItemPosition},itemCount==>${itemCount}");
-                if (lastItemPosition == itemCount - 1 && isUpScroll) {
+                if (isScroll && lastItemPosition == itemCount - 1 && isUpScroll) {
                     currentPage++;
                     onScrollListener?.onLoadMore(currentPage);
                     recyclerView.scrollToPosition(lastItemPosition);
@@ -43,7 +43,7 @@ class EastLessOnScrollListener : RecyclerView.OnScrollListener() {
                     }
                 }
                 val fristItemPosition: Int = linearLayoutManager.findFirstCompletelyVisibleItemPosition() //第一个显示的位置
-                if (fristItemPosition == 0 && !isUpScroll) {
+                if (isScroll && fristItemPosition == 0 && !isUpScroll) {
                     onScrollListener?.onRefresh()
                     onRefresh?.let {
                         it.invoke();
@@ -56,12 +56,14 @@ class EastLessOnScrollListener : RecyclerView.OnScrollListener() {
     @SuppressLint("LongLogTag")
     override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
         super.onScrolled(recyclerView, dx, dy)
-        Log.d(TAG,"DX==>${dx},DY==>${dy}");
+        Log.e(TAG,"DX==>${dx},DY==>${dy}");
         if(dy > sideDis){
+            isScroll = true;
             // 大于0表示正在向上滑动，小于等于0表示停止或向下滑动
             isUpScroll = dy > 0;
         }
     }
+
 
     fun setOnScrollListener(onScrollListener: OnLoadMoreListener){
         this.onScrollListener = onScrollListener;
