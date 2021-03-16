@@ -2,6 +2,7 @@ package com.god.uikit.commons
 
 import android.annotation.SuppressLint
 import android.util.Log
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.god.uikit.utils.dip2Px
@@ -29,26 +30,22 @@ class EastLessOnScrollListener : RecyclerView.OnScrollListener() {
         super.onScrollStateChanged(recyclerView, newState)
         val manager = recyclerView.getLayoutManager();
         manager?.let {
-            val linearLayoutManager = it as LinearLayoutManager;
-            if (newState === RecyclerView.SCROLL_STATE_IDLE) { //当前未滑动
-                val itemCount: Int = manager.getItemCount() //总数
-                val lastItemPosition: Int = linearLayoutManager.findLastCompletelyVisibleItemPosition() //最后显示的位置
-                Log.d(TAG,"lastItemPosition==>${lastItemPosition},itemCount==>${itemCount}");
-                if (isScroll && lastItemPosition == itemCount - 1 && isUpScroll) {
-                    currentPage++;
-                    onScrollListener?.onLoadMore(currentPage);
-                    recyclerView.scrollToPosition(lastItemPosition);
-                    onLoadMore?.let {
-                        it.invoke(currentPage);
-                    }
-                }
-                val fristItemPosition: Int = linearLayoutManager.findFirstCompletelyVisibleItemPosition() //第一个显示的位置
-                if (isScroll && fristItemPosition == 0 && !isUpScroll) {
-                    onScrollListener?.onRefresh()
-                    onRefresh?.let {
-                        it.invoke();
-                    }
-                }
+            Log.d(TAG,"run in onScrollStateChanged");
+            var lastVisiblePosition: Int = 0;
+            if(it is GridLayoutManager){
+                lastVisiblePosition = it.findLastVisibleItemPosition()
+            }else if(it is LinearLayoutManager){
+                lastVisiblePosition = it.findLastVisibleItemPosition()
+            }
+            Log.d(TAG,"ChildCount==>${it.getChildCount()},lastvisiblePosition==>${lastVisiblePosition}," +
+                    "ItemCount==>${it.getItemCount()}")
+            if (it.getChildCount() > 0             //当当前显示的item数量>0
+                && lastVisiblePosition>= it.itemCount -2           //当当前屏幕最后两个加载项位置>=所有item的数量
+                && it.itemCount > it.childCount
+            ){
+                currentPage++;
+                Log.d(TAG,"run onLoadMore");
+                onLoadMore?.invoke(currentPage);
             }
         }
     }
@@ -56,12 +53,8 @@ class EastLessOnScrollListener : RecyclerView.OnScrollListener() {
     @SuppressLint("LongLogTag")
     override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
         super.onScrolled(recyclerView, dx, dy)
-        Log.e(TAG,"DX==>${dx},DY==>${dy}");
-        if(dy > sideDis){
-            isScroll = true;
-            // 大于0表示正在向上滑动，小于等于0表示停止或向下滑动
-            isUpScroll = dy > 0;
-        }
+        // 大于0表示正在向上滑动，小于等于0表示停止或向下滑动
+        isUpScroll = dy > 0;
     }
 
 
