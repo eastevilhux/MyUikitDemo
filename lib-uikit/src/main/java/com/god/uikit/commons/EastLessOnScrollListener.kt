@@ -2,6 +2,7 @@ package com.god.uikit.commons
 
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.god.uikit.utils.dip2Px
 
 class EastLessOnScrollListener : RecyclerView.OnScrollListener() {
 
@@ -16,7 +17,9 @@ class EastLessOnScrollListener : RecyclerView.OnScrollListener() {
 
     private var onLoadMore : ((page:Int)->Unit)? = null;
     private var onRefresh : (()->Unit)? = null;
+    private var sideDis = 80.dip2Px();
 
+    var isScroll = false;//手势滑动的位置
     var isUpScroll = false //是否正在上滑标记
 
     override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
@@ -30,6 +33,7 @@ class EastLessOnScrollListener : RecyclerView.OnScrollListener() {
                 if (lastItemPosition == itemCount - 1 && isUpScroll) {
                     currentPage++;
                     onScrollListener?.onLoadMore(currentPage);
+                    recyclerView.scrollToPosition(lastItemPosition);
                     onLoadMore?.let {
                         it.invoke(currentPage);
                     }
@@ -47,8 +51,10 @@ class EastLessOnScrollListener : RecyclerView.OnScrollListener() {
 
     override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
         super.onScrolled(recyclerView, dx, dy)
-        // 大于0表示正在向上滑动，小于等于0表示停止或向下滑动
-        isUpScroll = dy > 0;
+        if(dy > sideDis){
+            // 大于0表示正在向上滑动，小于等于0表示停止或向下滑动
+            isUpScroll = dy > 0;
+        }
     }
 
     fun setOnScrollListener(onScrollListener: OnLoadMoreListener){
@@ -63,7 +69,9 @@ class EastLessOnScrollListener : RecyclerView.OnScrollListener() {
         this.onRefresh = onRefresh;
     }
 
-
+    fun setSideDis(sideDisDip : Int){
+        this.sideDis = sideDisDip.dip2Px();
+    }
 
     interface OnLoadMoreListener{
 
