@@ -34,16 +34,29 @@ class EastLessOnScrollListener : RecyclerView.OnScrollListener() {
             manager?.let {
                 Log.d(TAG,"run in onScrollStateChanged");
                 var lastVisiblePosition: Int = 0;
+                var firstCompletelyVisibleItemPosition : Int = 0;
                 if(it is GridLayoutManager){
+                    firstCompletelyVisibleItemPosition = it.findFirstCompletelyVisibleItemPosition();
                     lastVisiblePosition = it.findLastVisibleItemPosition()
+
                 }else if(it is LinearLayoutManager){
+                    firstCompletelyVisibleItemPosition = it.findFirstCompletelyVisibleItemPosition();
                     lastVisiblePosition = it.findLastVisibleItemPosition()
                 }
                 Log.d(TAG,"ChildCount==>${it.getChildCount()},lastvisiblePosition==>${lastVisiblePosition}," +
                         "ItemCount==>${it.getItemCount()}")
-                if (it.getChildCount() > 0             //当当前显示的item数量>0
-                    && lastVisiblePosition>= it.itemCount -2           //当当前屏幕最后两个加载项位置>=所有item的数量
-                ){
+
+
+                if(firstCompletelyVisibleItemPosition == 0 && it.childCount > 0){
+                    Log.d(TAG,"run onRefresh");
+                    currentPage = 1;
+                    onRefresh?.invoke();
+                    onScrollListener?.let {
+                        it.onRefresh();
+                    }
+                }else if(lastVisiblePosition >= it.itemCount -2 && it.childCount > 0){
+                    //当前屏幕最后两个加载项位置>=所有item的数量
+                    //当前显示的item数量>0
                     currentPage++;
                     Log.d(TAG,"run onLoadMore");
                     onLoadMore?.invoke(currentPage);
@@ -51,6 +64,7 @@ class EastLessOnScrollListener : RecyclerView.OnScrollListener() {
                         it.onLoadMore(currentPage);
                     }
                 }
+                Log.d(TAG,"run else");
             }
         }
     }
