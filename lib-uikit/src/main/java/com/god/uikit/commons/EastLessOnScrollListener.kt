@@ -1,5 +1,6 @@
 package com.god.uikit.commons
 
+import android.view.View
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 
@@ -23,22 +24,26 @@ class EastLessOnScrollListener : RecyclerView.OnScrollListener() {
         super.onScrollStateChanged(recyclerView, newState)
         val manager = recyclerView.getLayoutManager();
         manager?.let {
-            val linearLayoutManager = it as LinearLayoutManager;
+            val layoutManager = it as LinearLayoutManager;
             if (newState == RecyclerView.SCROLL_STATE_IDLE) { //当前未滑动
-                val itemCount: Int = manager.getItemCount() //总数
-                val lastItemPosition: Int = linearLayoutManager.findLastCompletelyVisibleItemPosition() //最后显示的位置
-                if (lastItemPosition == itemCount - 1 && isUpScroll) {
+                val lcp = layoutManager.findLastCompletelyVisibleItemPosition()
+                if (lcp == layoutManager.getItemCount() - 2) {
+                    // 倒数第2项
+                    val fcp = layoutManager.findFirstCompletelyVisibleItemPosition()
+                    val child: View? = layoutManager.findViewByPosition(lcp)
+                    child?.let {
+                        val deltaY: Int = recyclerView.getBottom() - recyclerView.getPaddingBottom() - it.bottom
+                        // fcp为0时说明列表滚动到了顶部, 不再滚动
+                        if (deltaY > 0 && fcp !== 0) {
+                            recyclerView.smoothScrollBy(0, -deltaY)
+                        }
+                    }
+                }else if(lcp== layoutManager.getItemCount() - 1){
+                    // 最后一项完全显示, 触发操作, 执行加载更多操作
                     currentPage++;
-                    onScrollListener?.onLoadMore(currentPage);
+                    onScrollListener?.let { it.onLoadMore(currentPage) }
                     onLoadMore?.let {
                         it.invoke(currentPage);
-                    }
-                }
-                val fristItemPosition: Int = linearLayoutManager.findFirstCompletelyVisibleItemPosition() //第一个显示的位置
-                if (fristItemPosition == 0 && !isUpScroll) {
-                    onScrollListener?.onRefresh()
-                    onRefresh?.let {
-                        it.invoke();
                     }
                 }
             }
