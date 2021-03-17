@@ -29,42 +29,37 @@ class EastLessOnScrollListener : RecyclerView.OnScrollListener() {
     override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
         super.onScrollStateChanged(recyclerView, newState)
         if(newState == RecyclerView.SCROLL_STATE_IDLE){
-            val manager = recyclerView.getLayoutManager();
-            Log.d(TAG,"isUpScroll==>${isUpScroll}")
-            manager?.let {
-                Log.d(TAG,"run in onScrollStateChanged");
-                var lastVisiblePosition: Int = 0;
-                var firstCompletelyVisibleItemPosition : Int = 0;
-                if(it is GridLayoutManager){
-                    firstCompletelyVisibleItemPosition = it.findFirstCompletelyVisibleItemPosition();
-                    lastVisiblePosition = it.findLastVisibleItemPosition()
-
-                }else if(it is LinearLayoutManager){
-                    firstCompletelyVisibleItemPosition = it.findFirstCompletelyVisibleItemPosition();
-                    lastVisiblePosition = it.findLastVisibleItemPosition()
-                }
-                Log.d(TAG,"ChildCount==>${it.getChildCount()},lastvisiblePosition==>${lastVisiblePosition}," +
-                        "ItemCount==>${it.getItemCount()}")
-
-
-                if(firstCompletelyVisibleItemPosition == 0 && it.childCount > 0){
-                    Log.d(TAG,"run onRefresh");
-                    currentPage = 1;
-                    onRefresh?.invoke();
-                    onScrollListener?.let {
-                        it.onRefresh();
-                    }
-                }else if(lastVisiblePosition >= it.itemCount -2 && it.childCount > 0){
-                    //当前屏幕最后两个加载项位置>=所有item的数量
-                    //当前显示的item数量>0
+            val layoutManager = recyclerView.layoutManager
+            if (layoutManager == null) {
+                Log.e(TAG, "NullPointException:  layoutManager is null")
+                return
+            }
+            if(layoutManager.itemCount <= 1){
+                return;
+            }
+            if (layoutManager is GridLayoutManager) {
+                val gridLayoutManager = layoutManager as GridLayoutManager?
+                //获取最后一个可见view的位置
+                val lastPosition = gridLayoutManager!!.findLastVisibleItemPosition()
+                val itemCount = gridLayoutManager.itemCount
+                val spanCount = gridLayoutManager.spanCount
+                // 提前3个进行预加载
+                if (lastPosition + spanCount * 3 >= itemCount - 1) {
                     currentPage++;
-                    Log.d(TAG,"run onLoadMore");
                     onLoadMore?.invoke(currentPage);
-                    onScrollListener?.let {
-                        it.onLoadMore(currentPage);
-                    }
+                    onScrollListener?.onLoadMore(currentPage)
                 }
-                Log.d(TAG,"run else");
+            } else if (layoutManager is LinearLayoutManager) {
+                val linearManager = layoutManager as LinearLayoutManager?
+                //获取最后一个可见view的位置
+                val lastPosition = linearManager!!.findLastVisibleItemPosition()
+                val itemCount = linearManager.itemCount
+                // 提前3个进行预加载
+                if (lastPosition >= itemCount - 4) {
+                    currentPage++;
+                    onLoadMore?.invoke(currentPage);
+                    onScrollListener?.onLoadMore(currentPage)
+                }
             }
         }
     }
@@ -96,9 +91,6 @@ class EastLessOnScrollListener : RecyclerView.OnScrollListener() {
     }
 
     interface OnLoadMoreListener{
-
-        fun onRefresh();
-
         fun onLoadMore(currentPage: Int);
     }
 
