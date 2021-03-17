@@ -47,6 +47,9 @@ class EastLessOnScrollListener : RecyclerView.OnScrollListener() {
                     currentPage++;
                     Log.d(TAG,"run onLoadMore");
                     onLoadMore?.invoke(currentPage);
+                    onScrollListener?.let {
+                        it.onLoadMore(currentPage);
+                    }
                 }
             }
         }
@@ -54,7 +57,9 @@ class EastLessOnScrollListener : RecyclerView.OnScrollListener() {
 
     @SuppressLint("LongLogTag")
     override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+        Log.d(TAG,"BEFOR_DX==>${dx},DY==>${dy}")
         super.onScrolled(recyclerView, dx, dy)
+        Log.d(TAG,"LAST_DX==>${dx},DY==>${dy}")
         // 大于0表示正在向上滑动，小于等于0表示停止或向下滑动
         isUpScroll = dy > 0;
     }
