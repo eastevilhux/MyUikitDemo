@@ -28,24 +28,26 @@ class EastLessOnScrollListener : RecyclerView.OnScrollListener() {
     @SuppressLint("LongLogTag")
     override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
         super.onScrollStateChanged(recyclerView, newState)
-        val manager = recyclerView.getLayoutManager();
-        Log.d(TAG,"isUpScroll==>${isUpScroll}")
-        manager?.let {
-            Log.d(TAG,"run in onScrollStateChanged");
-            var lastVisiblePosition: Int = 0;
-            if(it is GridLayoutManager){
-                lastVisiblePosition = it.findLastVisibleItemPosition()
-            }else if(it is LinearLayoutManager){
-                lastVisiblePosition = it.findLastVisibleItemPosition()
-            }
-            Log.d(TAG,"ChildCount==>${it.getChildCount()},lastvisiblePosition==>${lastVisiblePosition}," +
-                    "ItemCount==>${it.getItemCount()}")
-            if (it.getChildCount() > 0             //当当前显示的item数量>0
-                && lastVisiblePosition>= it.itemCount -2           //当当前屏幕最后两个加载项位置>=所有item的数量
-            ){
-                currentPage++;
-                Log.d(TAG,"run onLoadMore");
-                onLoadMore?.invoke(currentPage);
+        if(newState == RecyclerView.SCROLL_STATE_IDLE){
+            val manager = recyclerView.getLayoutManager();
+            Log.d(TAG,"isUpScroll==>${isUpScroll}")
+            manager?.let {
+                Log.d(TAG,"run in onScrollStateChanged");
+                var lastVisiblePosition: Int = 0;
+                if(it is GridLayoutManager){
+                    lastVisiblePosition = it.findLastVisibleItemPosition()
+                }else if(it is LinearLayoutManager){
+                    lastVisiblePosition = it.findLastVisibleItemPosition()
+                }
+                Log.d(TAG,"ChildCount==>${it.getChildCount()},lastvisiblePosition==>${lastVisiblePosition}," +
+                        "ItemCount==>${it.getItemCount()}")
+                if (it.getChildCount() > 0             //当当前显示的item数量>0
+                    && lastVisiblePosition>= it.itemCount -2           //当当前屏幕最后两个加载项位置>=所有item的数量
+                ){
+                    currentPage++;
+                    Log.d(TAG,"run onLoadMore");
+                    onLoadMore?.invoke(currentPage);
+                }
             }
         }
     }
