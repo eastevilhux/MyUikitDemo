@@ -53,6 +53,7 @@
         <attr name="lyn_iconSrc_nor_3" format="reference" />
         <attr name="lyn_iconSrc_nor_4" format="reference" />
         <attr name="lyn_iconSrc_nor_5" format="reference" />
+        <attr name="lyn_bottomTextSize" format="dimension"/>
     </declare-styleable>
 
     <declare-styleable name="TitleLayout">

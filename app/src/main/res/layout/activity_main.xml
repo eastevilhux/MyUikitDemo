@@ -46,5 +46,12 @@
         android:background="@color/colorAccent"
         app:lyn_inputType="mobile" />
 
-
+    <com.god.uikit.widget.BottomLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_50"
+        app:lyn_itemText_1="1"
+        app:lyn_itemText_2="2"
+        app:lyn_itemText_3="3"
+        app:lyn_itemText_4="4"
+        app:lyn_bottomTextSize="@dimen/sp_15"/>
 </LinearLayout>

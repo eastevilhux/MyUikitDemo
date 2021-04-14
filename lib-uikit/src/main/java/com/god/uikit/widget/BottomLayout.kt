@@ -5,6 +5,7 @@ import android.graphics.BitmapFactory
 import android.graphics.drawable.BitmapDrawable
 import android.graphics.drawable.Drawable
 import android.util.AttributeSet
+import android.util.TypedValue
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.FrameLayout
@@ -14,6 +15,8 @@ import androidx.databinding.ObservableField
 import androidx.databinding.ObservableMap
 import com.god.uikit.R
 import com.god.uikit.databinding.LayoutBottomBinding
+import com.god.uikit.utils.dip2Px
+import com.god.uikit.utils.px2dp
 
 class BottomLayout : FrameLayout {
     lateinit var dataBinding : LayoutBottomBinding;
@@ -54,6 +57,8 @@ class BottomLayout : FrameLayout {
     private var onBottomClickListener: OnBottomClickListener? = null
 
     private var haveLine = ObservableField<Boolean>(false);
+
+    private var bottomTextSize : Float = 14.dip2Px().toFloat();
 
     constructor(context: Context) : super(context) {}
     constructor(
@@ -183,6 +188,8 @@ class BottomLayout : FrameLayout {
         lineColor = ta.getColor(R.styleable.BottomLayout_lyn_lineColor,
             resources.getColor(R.color.colorLineLight));
 
+        bottomTextSize = ta.getDimension(R.styleable.BottomLayout_lyn_bottomTextSize,15.dip2Px().toFloat());
+
         ta.recycle();
         ta = null;
         initAttributeSet()
@@ -210,6 +217,11 @@ class BottomLayout : FrameLayout {
 
         index = ObservableField(1)
         dataBinding.itemIndex = index
+
+        dataBinding.bottomText1.setTextSize(TypedValue.COMPLEX_UNIT_PX,bottomTextSize);
+        dataBinding.bottomText2.setTextSize(TypedValue.COMPLEX_UNIT_PX,bottomTextSize);
+        dataBinding.bottomText3.setTextSize(TypedValue.COMPLEX_UNIT_PX,bottomTextSize);
+        dataBinding.bottomText4.setTextSize(TypedValue.COMPLEX_UNIT_PX,bottomTextSize);
     }
 
     /**
