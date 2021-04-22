@@ -6,6 +6,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 import android.util.AttributeSet;
+import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.FrameLayout;
@@ -54,6 +55,8 @@ public class TitleLayout extends FrameLayout {
 
     private int backTextColor;
 
+    private int titleTextSize  = 13;
+
     public TitleLayout(@NonNull Context context) {
         super(context);
     }
@@ -93,6 +96,7 @@ public class TitleLayout extends FrameLayout {
 
         iconBackType = new ObservableField<>(ta.getInt(R.styleable.TitleLayout_lyn_iconBackType,1));
 
+        titleTextSize = ta.getDimensionPixelSize(R.styleable.TitleLayout_lyn_title_textSize,13);
         ta.recycle();
         init();
     }
@@ -129,6 +133,7 @@ public class TitleLayout extends FrameLayout {
             default:
                 break;
         }
+        dataBinding.titleText.setTextSize(TypedValue.COMPLEX_UNIT_SP,titleTextSize);
     }
 
 

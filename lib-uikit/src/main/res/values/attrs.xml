@@ -75,6 +75,7 @@
             <enum name="square" value="1" />
             <enum name="rectangle" value="2" />
         </attr>
+        <attr name="lyn_title_textSize" format="dimension"/>
     </declare-styleable>
 
 
