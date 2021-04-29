@@ -258,6 +258,10 @@ class BottomLayout : FrameLayout {
        this.onBottomClickListener = onBottomClickListener;
     }
 
+    fun setSelect(index : Int){
+        this.index!!.set(index);
+    }
+
     fun twoAndThree(operation: (Int, Int) -> Int){
         //调用函数类型的参数
         val result = operation(2, 3)
