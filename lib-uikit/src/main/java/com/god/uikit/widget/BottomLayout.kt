@@ -17,6 +17,7 @@ import com.god.uikit.R
 import com.god.uikit.databinding.LayoutBottomBinding
 import com.god.uikit.utils.dip2Px
 import com.god.uikit.utils.px2dp
+import java.lang.IndexOutOfBoundsException
 
 class BottomLayout : FrameLayout {
     lateinit var dataBinding : LayoutBottomBinding;
@@ -261,6 +262,73 @@ class BottomLayout : FrameLayout {
     fun setSelect(index : Int){
         this.index!!.set(index);
     }
+
+    fun resetBottom(textList : MutableList<String>,norImageList : MutableList<Int>,
+                    selImageList : MutableList<Int>){
+        if(norImageList.size != selImageList.size){
+            throw IllegalAccessException("the norImageList number size must be the same of selImageList size");
+            return;
+        }
+        if(textList.size != norImageList.size){
+            throw IllegalAccessException("the textMap number size must be the same of norImageList size");
+            return;
+        }
+        if(textList.size > itemNumbers.get()?:0){
+            throw IndexOutOfBoundsException("the textMap size out of itemNumbers")
+        }
+        val textkeyList = arrayListOf("text1","text2","text3","text4","text5");
+        val selKeyList = arrayListOf("icon1sel","icon2sel","icon3sel","icon4sel","icon5sel");
+        val norKeyList = arrayListOf("icon1nor","icon2nor","icon3nor","icon4nor","icon5nor");
+        var i = 0;
+        textMap?.clear();
+        imageMap.clear();
+        textList.forEach {
+            textMap?.put(textkeyList.get(i), it);
+            i++;
+        }
+        i = 0;
+        selImageList.forEach {
+            imageMap.put(selKeyList.get(i),BitmapDrawable(BitmapFactory.decodeResource(resources, it)));
+            imageMap.put(norKeyList.get(i),BitmapDrawable(BitmapFactory.decodeResource(resources, norImageList.get(i))));
+            i++;
+        }
+    }
+
+    fun setBottomNumber(number:Int){
+        itemNumbers.set(number);
+    }
+
+    fun setText(index: Int,text:String){
+        textMap?.setValueAt(index,text);
+    }
+
+    fun setImage(index : Int,norImageResourceId : Int,selImageResourceId : Int){
+        if(index < itemNumbers.get()?:0){
+            when(index){
+                0->{
+                    imageMap.set("icon1sel",BitmapDrawable(BitmapFactory.decodeResource(resources, selImageResourceId)))
+                    imageMap.set("icon1nor",BitmapDrawable(BitmapFactory.decodeResource(resources, norImageResourceId)))
+                }
+                1->{
+                    imageMap.set("icon2sel",BitmapDrawable(BitmapFactory.decodeResource(resources, selImageResourceId)))
+                    imageMap.set("icon2nor",BitmapDrawable(BitmapFactory.decodeResource(resources, norImageResourceId)))
+                }
+                2->{
+                    imageMap.set("icon3sel",BitmapDrawable(BitmapFactory.decodeResource(resources, selImageResourceId)))
+                    imageMap.set("icon3nor",BitmapDrawable(BitmapFactory.decodeResource(resources, norImageResourceId)))
+                }
+                3->{
+                    imageMap.set("icon4sel",BitmapDrawable(BitmapFactory.decodeResource(resources, selImageResourceId)))
+                    imageMap.set("icon4nor",BitmapDrawable(BitmapFactory.decodeResource(resources, norImageResourceId)))
+                }
+                4->{
+                    imageMap.set("icon5sel",BitmapDrawable(BitmapFactory.decodeResource(resources, selImageResourceId)))
+                    imageMap.set("icon5nor",BitmapDrawable(BitmapFactory.decodeResource(resources, norImageResourceId)))
+                }
+            }
+        }
+    }
+
 
     fun twoAndThree(operation: (Int, Int) -> Int){
         //调用函数类型的参数
