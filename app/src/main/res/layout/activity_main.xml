@@ -47,11 +47,28 @@
         app:lyn_inputType="mobile" />
 
     <com.god.uikit.widget.BottomLayout
+        android:id="@+id/bottom_layout"
         android:layout_width="match_parent"
         android:layout_height="@dimen/dp_50"
-        app:lyn_itemText_1="1"
-        app:lyn_itemText_2="2"
-        app:lyn_itemText_3="3"
-        app:lyn_itemText_4="4"
-        app:lyn_bottomTextSize="@dimen/sp_15"/>
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:lyn_haveLine="true"
+        app:lyn_lineColor="@color/colorLineLight"
+        app:lyn_selTextColor="@color/colorApp"
+        app:lyn_norTextColor="@color/colorHint"
+        app:lyn_itemNumbers="4"
+        app:lyn_iconSrc_nor_1="@drawable/tab_main_guess_nor"
+        app:lyn_iconSrc_nor_2="@drawable/tab_main_through_nor"
+        app:lyn_iconSrc_nor_3="@drawable/tab_main_welfare_nor"
+        app:lyn_iconSrc_nor_4="@drawable/tab_main_user_nor"
+        app:lyn_iconSrc_sel_1="@drawable/tab_main_guess_sel"
+        app:lyn_iconSrc_sel_2="@drawable/tab_main_through_sel"
+        app:lyn_iconSrc_sel_3="@drawable/tab_main_welfare_sel"
+        app:lyn_iconSrc_sel_4="@drawable/tab_main_user_sel"
+        app:lyn_itemText_1="@string/t1"
+        app:lyn_itemText_2="@string/t2"
+        app:lyn_itemText_3="@string/t3"
+        app:lyn_itemText_4="@string/t4"
+        app:lyn_bottomTextSize="@dimen/sp_11"/>
 </LinearLayout>
