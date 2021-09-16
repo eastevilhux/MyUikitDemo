@@ -27,18 +27,48 @@ class ViewAttAdapter {
         @JvmStatic
         @BindingAdapter("android:src")
         fun setUikitImage(imageView: ImageView,file:File?){
-            Log.d(TAG,"WTF");
+            Log.d(TAG,"setUikitImage_file_file_path=>${file?.path}");
+            file?.let {
+                when(imageView?.id){
+                    else->{
+                        imageView?.let {
+                            Glide.with(imageView)
+                                .load(file)
+                                .into(it);
+                        }
+                    }
+                }
+            }
         }
 
         @JvmStatic
         @BindingAdapter("android:src")
         fun setUikitImage(imageView: ImageView?,url:String?){
+            Log.d(TAG,"setUikitImage_String_url=>${url}");
+            url?.let {
+                when(imageView?.id){
+                    else->{
+                        imageView?.let {
+                            Glide.with(imageView)
+                                .load(url)
+                                .into(it);
+                        }
+                    }
+                }
+            }
         }
 
 
         @JvmStatic
         @BindingAdapter("android:src")
         fun setUikitImage(imageView: ImageView?,resource:Int?){
+            Log.d(TAG,"setUikitImage_INT=>${resource}");
+            resource?.let {
+                when(imageView?.id){
+                    else->imageView?.setImageResource(it);
+                }
+            }
+
         }
 
         @JvmStatic
