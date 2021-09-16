@@ -80,14 +80,14 @@ class MainActivity : AppCompatActivity(), InputLayout.OnCountdownListener {
 
 
         var img = "https://c-ssl.duitang.com/uploads/item/201801/09/20180109191129_huyVW.jpeg"
-        val i1 = findViewById<ImageView>(R.id.iv_baerjie)
+        val i1 = findViewById<ImageView>(R.id.iv_text1)
         GlideApp.with(i1)
             .load(img)
             .error(R.mipmap.ic_launcher)
             .placeholder(R.mipmap.ic_launcher)
             .into(i1);
 
-        val i2 = findViewById<ImageView>(R.id.iv_test2);
+        val i2 = findViewById<ImageView>(R.id.iv_text2);
         GlideApp.with(this)
             .load(R.drawable.icon_no_data_default)
             .error(R.mipmap.ic_launcher)
