@@ -56,5 +56,10 @@ dependencies {
     api "pub.devrel:easypermissions:3.0.0"
     api "com.yalantis:ucrop:1.5.0"
     api 'com.contrarywind:Android-PickerView:4.1.9'
+
+    api ("com.github.donkingliang:ImageSelector:2.2.0") {
+        exclude  group:"com.github.bumptech.glide", module: "glide"
+        exclude  group:"androidx.appcompat", module: "appcompat"
+    }
 }
 
