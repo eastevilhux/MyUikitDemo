@@ -1,7 +1,3 @@
 <resources>
     <string name="app_name">MyUikitDemo</string>
-    <string name="t1">1</string>
-    <string name="t2">2</string>
-    <string name="t3">3</string>
-    <string name="t4">4</string>
 </resources>

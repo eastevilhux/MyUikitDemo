@@ -1,7 +1,6 @@
 package com.god.uikit.widget
 
 import android.content.Context
-import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.graphics.drawable.BitmapDrawable
 import android.graphics.drawable.Drawable
@@ -17,25 +16,26 @@ import androidx.databinding.ObservableMap
 import com.god.uikit.R
 import com.god.uikit.databinding.LayoutBottomBinding
 import com.god.uikit.utils.dip2Px
-import java.io.InputStream
+import com.god.uikit.utils.px2dp
+import java.lang.IndexOutOfBoundsException
 
 class BottomLayout : FrameLayout {
     lateinit var dataBinding : LayoutBottomBinding;
 
-    lateinit var imageMap : ObservableMap<String,Int>;
+    lateinit var imageMap : ObservableMap<String,Drawable>;
     lateinit var itemNumbers : ObservableField<Int>;
 
-    private var iconSel1: Int? = null
-    private var iconSel2: Int? = null
-    private var iconSel3: Int? = null
-    private var iconSel4: Int? = null
-    private var iconSel5: Int? = null
+    private var iconSel1: Drawable? = null
+    private var iconSel2: Drawable? = null
+    private var iconSel3: Drawable? = null
+    private var iconSel4: Drawable? = null
+    private var iconSel5: Drawable? = null
 
-    private var iconNor1: Int? = null
-    private var iconNor2: Int? = null
-    private var iconNor3: Int? = null
-    private var iconNor4: Int? = null
-    private var iconNor5: Int? = null
+    private var iconNor1: Drawable? = null
+    private var iconNor2: Drawable? = null
+    private var iconNor3: Drawable? = null
+    private var iconNor4: Drawable? = null
+    private var iconNor5: Drawable? = null
 
     private var text1: String? = null
     private var text2: String? = null
@@ -81,19 +81,54 @@ class BottomLayout : FrameLayout {
         //默认3个底部导航栏
         itemNumbers = ObservableField(ta.getInt(R.styleable.BottomLayout_lyn_itemNumbers,3));
 
-        val tempBtp = R.drawable.icon_no_data_default;
-
+        val tempBtp: Drawable = BitmapDrawable(
+            BitmapFactory.decodeResource(
+                resources,
+                R.drawable.icon_no_data_default
+            )
+        )
         imageMap = ObservableArrayMap();
 
-        iconSel1 = ta.getResourceId(R.styleable.BottomLayout_lyn_iconSrc_sel_1,R.drawable.icon_no_data_default);
-        iconNor1 = ta.getResourceId(R.styleable.BottomLayout_lyn_iconSrc_nor_1,R.drawable.icon_no_data_default);
+        var bd = ta.getDrawable(R.styleable.BottomLayout_lyn_iconSrc_sel_1)
+        if(bd == null){
+            iconSel1 = tempBtp;
+        }else{
+            iconSel1 = bd;
+        }
+        bd = ta.getDrawable(R.styleable.BottomLayout_lyn_iconSrc_nor_1);
+        if(bd == null){
+            iconNor1 = tempBtp;
+        }else{
+            iconNor1 = bd;
+        }
 
-        iconSel2 = ta.getResourceId(R.styleable.BottomLayout_lyn_iconSrc_sel_2,R.drawable.icon_no_data_default);
-        iconNor2 = ta.getResourceId(R.styleable.BottomLayout_lyn_iconSrc_nor_2,R.drawable.icon_no_data_default);
+        bd = ta.getDrawable(R.styleable.BottomLayout_lyn_iconSrc_sel_2);
+        if(bd == null){
+            iconSel2 = tempBtp;
+        }else{
+            iconSel2 = bd;
+        }
 
-        iconSel3 = ta.getResourceId(R.styleable.BottomLayout_lyn_iconSrc_sel_3,R.drawable.icon_no_data_default);
-        iconNor3 = ta.getResourceId(R.styleable.BottomLayout_lyn_iconSrc_nor_3,R.drawable.icon_no_data_default);
+        bd = ta.getDrawable(R.styleable.BottomLayout_lyn_iconSrc_nor_2);
+        if(bd == null){
+            iconNor2 = tempBtp;
+        }else{
+            iconNor2 = bd;
+        }
 
+        bd = ta.getDrawable(R.styleable.BottomLayout_lyn_iconSrc_sel_3);
+        if(bd == null){
+            iconSel3 = tempBtp;
+        }else{
+            iconSel3 = bd;
+        }
+
+        bd = ta.getDrawable(R.styleable.BottomLayout_lyn_iconSrc_nor_3);
+        if(bd == null){
+            iconNor3 = tempBtp;
+        }else{
+            iconNor3 = bd;
+        }
         imageMap["icon1sel"] = iconSel1;
         imageMap["icon2sel"] = iconSel2;
         imageMap["icon3sel"] = iconSel3;
@@ -102,10 +137,19 @@ class BottomLayout : FrameLayout {
         imageMap["icon3nor"] = iconNor3;
 
         if(itemNumbers.get()!! > 3) {
-            iconSel4 = ta.getResourceId(R.styleable.BottomLayout_lyn_iconSrc_sel_4,R.drawable.icon_no_data_default);
-            iconNor4 = ta.getResourceId(R.styleable.BottomLayout_lyn_iconSrc_nor_4,R.drawable.icon_no_data_default);
-
+            bd = ta.getDrawable(R.styleable.BottomLayout_lyn_iconSrc_sel_4);
+            if(bd == null){
+                iconSel4 =  tempBtp;
+            }else{
+                iconSel4 = bd;
+            }
             imageMap["icon4sel"] = iconSel4;
+            bd = ta.getDrawable(R.styleable.BottomLayout_lyn_iconSrc_nor_4);
+            if(bd == null){
+                iconNor4 = tempBtp;
+            }else{
+                iconNor4 = bd;
+            }
             imageMap["icon4nor"] = iconNor4;
 
             text4 = ta.getString(R.styleable.BottomLayout_lyn_itemText_4)
@@ -113,9 +157,20 @@ class BottomLayout : FrameLayout {
         }
 
         if(itemNumbers.get()!! > 4){
-            iconSel5 = ta.getResourceId(R.styleable.BottomLayout_lyn_iconSrc_sel_5,R.drawable.icon_no_data_default);
-            iconNor5 = ta.getResourceId(R.styleable.BottomLayout_lyn_iconSrc_nor_5,R.drawable.icon_no_data_default);
+            bd = ta.getDrawable(R.styleable.BottomLayout_lyn_iconSrc_sel_5);
+            if(bd == null){
+                iconSel5 = tempBtp;
+            }else{
+                iconSel5 = bd;
+            }
             imageMap["icon5sel"] = iconSel5
+
+            bd = ta.getDrawable(R.styleable.BottomLayout_lyn_iconSrc_nor_5);
+            if(bd == null){
+                iconNor5 = tempBtp;
+            }else{
+                iconNor5 = bd;
+            }
             imageMap["icon5nor"] = iconNor5
 
             text5 = ta.getString(R.styleable.BottomLayout_lyn_itemText_5)
@@ -232,22 +287,9 @@ class BottomLayout : FrameLayout {
             i++;
         }
         i = 0;
-        val opt = BitmapFactory.Options();
-        opt.inPreferredConfig = Bitmap.Config.ARGB_8888;
-        opt.inPurgeable = true;
-        opt.inInputShareable = true;
-        var inputStream : InputStream;
-        var bitmap : Bitmap? = null;
-        var drawable : BitmapDrawable? = null;
         selImageList.forEach {
-            //不处理可能会内存溢出，以后再说吧
-
-            /*inputStream = resources.openRawResource(it);
-            bitmap = BitmapFactory.decodeStream(inputStream,null,opt);
-            drawable = BitmapDrawable(resources,bitmap);*/
-
-            imageMap.put(selKeyList.get(i),it);
-            imageMap.put(norKeyList.get(i),norImageList.get(i));
+            imageMap.put(selKeyList.get(i),BitmapDrawable(BitmapFactory.decodeResource(resources, it)));
+            imageMap.put(norKeyList.get(i),BitmapDrawable(BitmapFactory.decodeResource(resources, norImageList.get(i))));
             i++;
         }
     }
@@ -264,24 +306,24 @@ class BottomLayout : FrameLayout {
         if(index < itemNumbers.get()?:0){
             when(index){
                 0->{
-                    imageMap.set("icon1sel",selImageResourceId)
-                    imageMap.set("icon1nor",norImageResourceId)
+                    imageMap.set("icon1sel",BitmapDrawable(BitmapFactory.decodeResource(resources, selImageResourceId)))
+                    imageMap.set("icon1nor",BitmapDrawable(BitmapFactory.decodeResource(resources, norImageResourceId)))
                 }
                 1->{
-                    imageMap.set("icon2sel",selImageResourceId)
-                    imageMap.set("icon2nor",norImageResourceId)
+                    imageMap.set("icon2sel",BitmapDrawable(BitmapFactory.decodeResource(resources, selImageResourceId)))
+                    imageMap.set("icon2nor",BitmapDrawable(BitmapFactory.decodeResource(resources, norImageResourceId)))
                 }
                 2->{
-                    imageMap.set("icon3sel",selImageResourceId)
-                    imageMap.set("icon3nor",norImageResourceId)
+                    imageMap.set("icon3sel",BitmapDrawable(BitmapFactory.decodeResource(resources, selImageResourceId)))
+                    imageMap.set("icon3nor",BitmapDrawable(BitmapFactory.decodeResource(resources, norImageResourceId)))
                 }
                 3->{
-                    imageMap.set("icon4sel",selImageResourceId)
-                    imageMap.set("icon4nor",norImageResourceId)
+                    imageMap.set("icon4sel",BitmapDrawable(BitmapFactory.decodeResource(resources, selImageResourceId)))
+                    imageMap.set("icon4nor",BitmapDrawable(BitmapFactory.decodeResource(resources, norImageResourceId)))
                 }
                 4->{
-                    imageMap.set("icon5sel",selImageResourceId)
-                    imageMap.set("icon5nor",norImageResourceId)
+                    imageMap.set("icon5sel",BitmapDrawable(BitmapFactory.decodeResource(resources, selImageResourceId)))
+                    imageMap.set("icon5nor",BitmapDrawable(BitmapFactory.decodeResource(resources, norImageResourceId)))
                 }
             }
         }

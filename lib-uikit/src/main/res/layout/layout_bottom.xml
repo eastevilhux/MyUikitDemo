@@ -22,7 +22,7 @@
 
         <variable
             name="imageMap"
-            type="androidx.databinding.ObservableMap&lt;String,Integer&gt;"/>
+            type="androidx.databinding.ObservableMap&lt;String,android.graphics.drawable.Drawable&gt;"/>
 
         <variable
             name="textMap"
