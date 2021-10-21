@@ -3,8 +3,11 @@ package com.hux.uikit.demo
 import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import com.god.uikit.commons.GlideApp
+import com.god.uikit.entity.Image
 import com.god.uikit.entity.ItemText
 import com.god.uikit.widget.InputLayout
 import com.god.uikit.widget.dialog.CalendarDialog
@@ -74,6 +77,22 @@ class MainActivity : AppCompatActivity(), InputLayout.OnCountdownListener {
             layout.startTime(6000);
         }
         layout.onCountdownListener = this;
+
+
+        var img = "https://c-ssl.duitang.com/uploads/item/201801/09/20180109191129_huyVW.jpeg"
+        val i1 = findViewById<ImageView>(R.id.iv_text1)
+        GlideApp.with(i1)
+            .load(img)
+            .error(R.mipmap.ic_launcher)
+            .placeholder(R.mipmap.ic_launcher)
+            .into(i1);
+
+        val i2 = findViewById<ImageView>(R.id.iv_text2);
+        GlideApp.with(this)
+            .load(R.drawable.icon_no_data_default)
+            .error(R.mipmap.ic_launcher)
+            .placeholder(R.mipmap.ic_launcher)
+            .into(i2);
 
     }
 

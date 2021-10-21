@@ -27,18 +27,15 @@ class ViewAttAdapter {
         @JvmStatic
         @BindingAdapter("android:src")
         fun setUikitImage(imageView: ImageView,file:File?){
-            Log.d(TAG,"WTF");
-            when(imageView.id){
-                R.id.iv_img_file->{
-                    if(file == null){
-                        imageView.setImageResource(R.drawable.ic_upload_image_default)
-                    }else{
-                        Glide.with(imageView)
-                            .load(file)
-                            .apply(RequestOptions()
-                                .placeholder(R.drawable.ic_upload_image_default)
-                                .error(R.drawable.ic_upload_image_default))
-                            .into(imageView)
+            Log.d(TAG,"setUikitImage_file_file_path=>${file?.path}");
+            file?.let {
+                when(imageView?.id){
+                    else->{
+                        imageView?.let {
+                            Glide.with(imageView)
+                                .load(file)
+                                .into(it);
+                        }
                     }
                 }
             }
@@ -47,14 +44,16 @@ class ViewAttAdapter {
         @JvmStatic
         @BindingAdapter("android:src")
         fun setUikitImage(imageView: ImageView?,url:String?){
-            when(imageView?.id){
-                R.id.iv_url->{
-                    Glide.with(imageView)
-                        .load(url)
-                        .apply(RequestOptions()
-                            .placeholder(R.drawable.ic_upload_image_default)
-                            .error(R.drawable.ic_upload_image_default))
-                        .into(imageView);
+            Log.d(TAG,"setUikitImage_String_url=>${url}");
+            url?.let {
+                when(imageView?.id){
+                    else->{
+                        imageView?.let {
+                            Glide.with(imageView)
+                                .load(url)
+                                .into(it);
+                        }
+                    }
                 }
             }
         }
@@ -63,21 +62,13 @@ class ViewAttAdapter {
         @JvmStatic
         @BindingAdapter("android:src")
         fun setUikitImage(imageView: ImageView?,resource:Int?){
-            when(imageView?.id){
-                R.id.iv_resource->{
-                    Glide.with(imageView)
-                        .load(resource)
-                        .apply(RequestOptions()
-                            .placeholder(R.drawable.ic_upload_image_default)
-                            .error(R.drawable.ic_upload_image_default))
-                        .into(imageView);
-                }
-                else->{
-                    if (resource != null) {
-                        imageView?.setImageResource(resource);
-                    }
+            Log.d(TAG,"setUikitImage_INT=>${resource}");
+            resource?.let {
+                when(imageView?.id){
+                    else->imageView?.setImageResource(it);
                 }
             }
+
         }
 
         @JvmStatic
