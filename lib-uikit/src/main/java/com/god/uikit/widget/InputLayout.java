@@ -180,6 +180,9 @@ public class InputLayout extends FrameLayout implements CountDownTimerButton.OnC
         dataBinding.menuButton.stop();
     }
 
+    public void stopTime(){
+        dataBinding.menuButton.stop();
+    }
 
     public interface OnInputMenuClickListener{
 
